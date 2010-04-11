@@ -1,0 +1,122 @@
+#VRML V2.0 utf8
+
+#Projet DePoEcK
+
+Group {
+    children [
+	
+		# background à redéfinir ==> pour ne pas rien mettre ...
+        Background {
+            frontUrl ["terre.jpg"]
+            backUrl ["espace.gif"]
+            rightUrl ["espace.gif"]
+            leftUrl ["espace.gif"]
+            topUrl ["soleil.gif"]
+            bottomUrl ["espace.gif"]
+        }
+
+        PointLight {
+            location 20 20 10
+        }
+
+		#Permet de se déplacer sur le terrain
+		#en respectant la nivellation
+		#Mode NOCLIP off
+        NavigationInfo {
+            headlight FALSE
+            avatarSize [ 0.25,1.0,0.25 ]
+        }
+                
+        Viewpoint {
+            position 0 6 0
+            orientation 0 1 0 -1.57					#rotation selon y de -pi/2
+            description "depart"
+        }
+
+		
+		#forme pour repérer le point 0 0 0 dans le monde
+		#la pointe est orientée vers Z (GRIS)
+        Transform {                                #position de la forme
+            translation  0.0 -3.0 0.0
+            children [
+                Shape {                        
+                    appearance Appearance {
+                        material Material {}
+                    }
+                    geometry Cone {               #forme conique 1*2 metres par defaut
+                    }
+                }
+            ]
+        },
+		
+		#la pointe est orientée vers X (JAUNE)
+		Transform {                                #position de la forme
+            translation  5.0 0.0 0.0
+			rotation 0.0 0.0 1.0 -1.57
+            children [
+                Shape {                        
+                    appearance Appearance {
+                        material Material {
+						diffuseColor 1 1 0
+						}
+                    }
+                    geometry Cone {               #forme conique 1*2 metres par defaut
+                    }
+                }
+            ]
+        },
+		
+		
+		
+		Transform {
+			translation 0 0 0
+            children [
+
+                Shape {
+                    appearance DEF ground Appearance {
+                        texture ImageTexture  {
+                            url ["./ground1.jpg"]
+                        }
+                        textureTransform TextureTransform {
+                            scale 14 22
+                        }
+                    }
+                    geometry ElevationGrid {
+                        ccw FALSE              
+                        solid FALSE            
+                        xDimension 12          
+                        xSpacing 3             
+                        zDimension 22
+                        zSpacing 3
+                        height [
+						# initialement, on voit vers ici ==>
+                            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                            0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                            0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                            0, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 0,
+                            0, 0, 1, 1, 0, 0, 0, 1, 1, 1, 1, 0,
+                            0, 0, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0,
+                            0, 0, 0, 0, 1, 1, 1, 1, 0, 1, 1, 0,
+                            0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1,
+                            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1,
+                            0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0,
+                            0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0,
+                            0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0,
+                            0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0,
+                            0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0,
+                            0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0,
+                            0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0,
+                            0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0,
+                            0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0,
+                            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+
+                        ]
+                    }
+                }
+            ]
+        }
+	]
+}

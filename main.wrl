@@ -65,9 +65,7 @@ Group {
                 }
             ]
         },
-		
-		
-		
+
 		Transform {
 			translation -19 0 -33
             children [
@@ -100,8 +98,8 @@ Group {
                             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
                             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
                             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                            0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0,
-                            0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0,
+                            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
                             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
                             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
                             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -116,6 +114,103 @@ Group {
                     }
                 }
             ]
-        }
+        },
+		
+		Transform {
+			translation 2 0.01 -1
+            children [
+
+                Shape {
+                    appearance DEF road Appearance {
+                        texture ImageTexture  {
+                            url ["./road.jpg"]
+                        }
+                        textureTransform TextureTransform {
+                            scale 4 4 
+                        }
+                    }
+                    geometry ElevationGrid {
+                        ccw FALSE              
+                        solid FALSE            
+                        xDimension 2          
+                        xSpacing 3             
+                        zDimension 2
+                        zSpacing 3
+                        height [
+                            0, 0,
+							0, 0
+                        ]
+                    }
+                }
+            ]
+        },
+		
+		Transform {
+			translation 5 0.01 -1
+            children [
+
+                Shape {
+                    appearance USE road
+                    geometry ElevationGrid {
+                        ccw FALSE              
+                        solid FALSE            
+                        xDimension 2          
+                        xSpacing 3             
+                        zDimension 2
+                        zSpacing 3
+                        height [
+                            0, 0,
+							0, 0
+                        ]
+                    }
+                }
+            ]
+        },
+		
+		Transform {
+			translation 8 0.01 -1
+            children [
+
+                Shape {
+                    appearance USE road
+                    geometry ElevationGrid {
+                        ccw FALSE              
+                        solid FALSE            
+                        xDimension 2          
+                        xSpacing 3             
+                        zDimension 2
+                        zSpacing 3
+                        height [
+                            0, 0,
+							0, 0
+                        ]
+                    }
+                }
+            ]
+        },
+		
+		Transform {
+			translation 11 0.01 -1
+            children [
+
+                Shape {
+                    appearance USE road
+                    geometry ElevationGrid {
+                        ccw FALSE              
+                        solid FALSE            
+                        xDimension 2          
+                        xSpacing 3             
+                        zDimension 2
+                        zSpacing 3
+                        height [
+                            0, 0,
+							0, 0
+                        ]
+                    }
+                }
+            ]
+        },
+		
+		
 	]
 }

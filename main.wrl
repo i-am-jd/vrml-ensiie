@@ -35,7 +35,7 @@ Group {
 
 		
 		#forme pour repérer le point 0 0 0 dans le monde
-		#la pointe est orientée vers Z (GRIS)
+		#la pointe est orientée vers Y (GRIS)
         Transform {                                #position de la forme
             translation  0.0 -3.0 0.0
             children [

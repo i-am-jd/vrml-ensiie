@@ -1468,7 +1468,7 @@ DEF Animations Group {
 	  cycleInterval 2
 	  startTime -1
 	  stopTime 0
-	  loop TRUE
+	  loop FALSE
 	}
       ]
     }
@@ -1869,3 +1869,29 @@ ROUTE neckRotInterp_Jump.value_changed TO hanim_vc4.set_rotation
 ROUTE upper_bodyRotInterp_Jump.value_changed TO hanim_vl1.set_rotation
 ROUTE whole_bodyRotInterp_Jump.value_changed TO hanim_HumanoidRoot.set_rotation
 ROUTE whole_bodyTranInterp_Jump.value_changed TO hanim_HumanoidRoot.set_translation
+
+Transform {
+   translation 3 0 0
+   children [
+      DEF capteur TouchSensor {}
+      Shape {                        
+	 appearance Appearance {
+	    material Material {}
+	 }
+	 geometry Box {
+	 }
+      }
+   ]
+}
+
+DEF nancy_script Script {
+   field SFNode Walk_Time USE Walk_Time
+   field SFNode bodyInterpolator USE whole_bodyTranInterp_BasicWalk
+   field SFInt32 nbCycles 0
+   eventIn SFTime startWalk
+   eventIn SFBool continueWalk
+   url ["nancy.js"]
+}
+
+ROUTE capteur.touchTime TO nancy_script.startWalk
+ROUTE Walk_Time.isActive TO nancy_script.continueWalk

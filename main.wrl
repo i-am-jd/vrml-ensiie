@@ -216,7 +216,7 @@ Group {
 }
 
 Transform {
-   translation 0 0 0
+   translation 2 0 0
    children [
       Inline {
 	 url ["nancy.wrl"]

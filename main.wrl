@@ -214,3 +214,12 @@ Group {
 		
 	]
 }
+
+Transform {
+   translation 0 0 0
+   children [
+      Inline {
+	 url ["nancy.wrl"]
+      }
+   ]
+}

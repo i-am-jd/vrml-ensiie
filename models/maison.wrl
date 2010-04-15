@@ -201,7 +201,7 @@ DEF cube1 Transform {
           transparency 0.0
           shininess 1.0
         }
-        texture ImageTexture { url "c:/Users/Guillaume/Desktop/Vmodels/textures/toit_orange.jpg" }
+        texture ImageTexture { url "textures/toit_orange.jpg" }
       }
       geometry IndexedFaceSet {
         normalPerVertex TRUE

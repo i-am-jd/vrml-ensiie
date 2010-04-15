@@ -5,18 +5,18 @@
 Group {
     children [
 	
-		# background  redfinir ==> pour ne pas rien mettre ...
-        Background {
-            frontUrl ["terre.jpg"]
-            backUrl ["espace.gif"]
-            rightUrl ["espace.gif"]
-            leftUrl ["espace.gif"]
-            topUrl ["soleil.gif"]
-            bottomUrl ["espace.gif"]
-        }
+		Background {
+			leftUrl "models/textures/sky0004.jpg"
+			frontUrl "models/textures/sky0005.jpg"
+			rightUrl "models/textures/sky0001.jpg"
+			backUrl "models/textures/sky0002.jpg"
+			topUrl "models/textures/sky0003.jpg"
+			bottomUrl "models/textures/sky0006.jpg"
+		}
 
         PointLight {
-            location 20 20 10
+			
+            location 0 20 0
         }
 
 		#Permet de se dplacer sur le terrain
@@ -24,7 +24,7 @@ Group {
 		#Mode NOCLIP off
         NavigationInfo {
             headlight FALSE
-            avatarSize [ 0.25,1.0,0.25 ]
+            avatarSize [ 0.25,1.5,0.25 ]
         }
                 
         Viewpoint {
@@ -221,6 +221,18 @@ DEF yt Transform {
    children [
       Inline {
 	 url ["yt/yt.wrl"]
+      }
+   ]
+}
+
+DEF maison Transform {
+   translation 1 0 3
+   rotation 0 1 0 0
+   scale 3 3 3
+   scaleOrientation 0 1 0 0
+   children [
+      Inline {
+	 url ["models/maison.wrl"]
       }
    ]
 }

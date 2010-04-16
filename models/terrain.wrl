@@ -3441,7 +3441,7 @@ DEF cube1_copy10 Transform {
           transparency 0.0
           shininess 1.0
         }
-        texture ImageTexture { url ""textures/grass.jpg" }
+        texture ImageTexture { url "textures/grass.jpg" }
       }
       geometry IndexedFaceSet {
         normalPerVertex TRUE
@@ -28682,7 +28682,7 @@ DEF cube1_copy2 Transform {
           transparency 0.0
           shininess 1.0
         }
-        texture ImageTexture { url ""textures/grass.jpg" }
+        texture ImageTexture { url "textures/grass.jpg" }
       }
       geometry IndexedFaceSet {
         normalPerVertex TRUE
@@ -35137,7 +35137,7 @@ DEF cube1 Transform {
           transparency 0.0
           shininess 1.0
         }
-        texture ImageTexture { url ""textures/grass.jpg" }
+        texture ImageTexture { url "textures/grass.jpg" }
       }
       geometry IndexedFaceSet {
         normalPerVertex TRUE

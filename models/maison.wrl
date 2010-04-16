@@ -28873,6 +28873,7 @@ DEF cube2_copy5 Transform {
           0, 0, 0, 0, -1 ]
       }
     },
+	DEF channelSensor TouchSensor {},
     Shape {
       appearance Appearance {
         material DEF tele Material {
@@ -28883,8 +28884,10 @@ DEF cube2_copy5 Transform {
           transparency 0.0
           shininess 1.0
         }
-        texture ImageTexture { url "textures/ensiie.jpg" }
+		
+        texture DEF channelTexture MovieTexture { url "textures/matrix-15.gif" loop TRUE }
       }
+	  
       geometry IndexedFaceSet {
         normalPerVertex TRUE
         colorPerVertex TRUE
@@ -45023,3 +45026,15 @@ DEF cube1 Transform {
   ]
 }
 
+DEF channelScript Script {
+	eventIn SFTime trigger
+	field SFInt32 channel 0
+	field SFNode channelTexture USE channelTexture
+	url "javascript: var gifs = [\"textures/matrix-15.gif\", \"textures/8.gif\"];
+					 function trigger(time) {
+						channel = (channel + 1) % 2;
+						channelTexture.url = new MFString(gifs[channel]);
+					 }"
+}
+
+ROUTE channelSensor.touchTime TO channelScript.trigger

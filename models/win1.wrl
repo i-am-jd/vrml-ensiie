@@ -1,7 +1,8 @@
 #VRML V2.0 utf8
 #Exported from Wings 3D 1.2
-DEF cube5 Transform {
+DEF win Transform {
   children [
+	DEF capteur TouchSensor {}
     Shape {
       appearance Appearance {
         material DEF default Material {
@@ -63,7 +64,19 @@ DEF cube5 Transform {
   ]
 }
 
-DEF winSript Script {
+DEF winTranInterp PositionInterpolator {
+	  key [ 0, 1 ]
+	  keyValue [ 0 0 0, 0 0 0.27]
+}
+
+DEF winTranTime TimeSensor {
+	cycleInterval 1
+	startTime -1
+	stopTime 0
+	loop FALSE
+}
+
+DEF winScript Script {
 	field SFBool opened FALSE
 	field SFBool blocked FALSE
 	field SFNode winTranInterp USE winTranInterp
@@ -78,12 +91,12 @@ DEF winSript Script {
 							return;
 						if(!opened) {
 							opened = true;
-							winTranInterp.keyValue[0][0] = 0;
-							winTranInterp.keyValue[1][0] = 1.2;
+							winTranInterp.keyValue[0][2] = 0;
+							winTranInterp.keyValue[1][2] = 0.27;
 						} else {
 							opened = false;
-							winTranInterp.keyValue[0][0] = 1.2;
-							winTranInterp.keyValue[1][0] = 0;
+							winTranInterp.keyValue[0][2] = 0.27;
+							winTranInterp.keyValue[1][2] = 0;
 						}
 						winTranTime.set_startTime = time; 
 					}

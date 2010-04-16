@@ -145,3 +145,103 @@ Transform {
 	children [ Inline { url "yt/yt.wrl" } ]
 }
 
+Transform {
+	translation -18 0 -10
+	scale 1. 0.8 1.
+	scaleOrientation 0 1 0 0
+	children [ DEF tree9 Inline { url "models/tree9.wrl" } ]
+}
+
+Transform {
+	translation -17 0 -12
+	scale 1. 0.8 1.
+	scaleOrientation 0 1 0 0
+	rotation 0 1 0 2
+	children [ USE tree9 ]
+}
+
+Transform {
+	translation -19 0 -13
+	scale 1. 0.8 1.
+	scaleOrientation 0 1 0 0
+	rotation 0 1 0 2
+	children [ USE tree9 ]
+}
+
+Transform {
+	translation -10 0 0
+	scale 0.6 0.6 0.6
+	children [ USE tree9 ]
+}
+
+Transform {
+	scale 0.1 0.1 0.1
+	translation -4 0 0
+	children [ DEF tree6 Inline { url "models/tree6.wrl" } ]
+}
+
+Transform {
+	scale 0.1 0.1 0.1
+	translation -4 0 -2.5
+	children [ USE tree6 ]
+}
+
+Transform {
+	scale 0.1 0.1 0.1
+	translation -4 0 2.5
+	children [ USE tree6 ]
+}
+
+Transform {
+	scale 0.1 0.1 0.1
+	translation 16 0 0
+	children [ USE tree6 ]
+}
+
+Transform {
+	scale 0.1 0.1 0.1
+	translation 16 0 -2.5
+	children [ USE tree6 ]
+}
+
+Transform {
+	scale 0.1 0.1 0.1
+	translation 16 0 2.5
+	children [ USE tree6 ]
+}
+
+Transform {
+	scale 0.1 0.1 0.1
+	translation -4 0 0
+	children [ USE tree6 ]
+}
+
+Transform {
+	scale 0.1 0.1 0.1
+	translation -4 0 -2.5
+	children [ USE tree6 ]
+}
+
+Transform {
+	scale 0.1 0.1 0.1
+	translation -4 0 2.5
+	children [ USE tree6 ]
+}
+
+Transform {
+	scale 0.1 0.1 0.1
+	translation 16 0 0
+	children [ USE tree6 ]
+}
+
+Transform {
+	scale 0.1 0.1 0.1
+	translation 16 0 -2.5
+	children [ USE tree6 ]
+}
+
+Transform {
+	scale 0.1 0.1 0.1
+	translation 16 0 2.5
+	children [ USE tree6 ]
+}

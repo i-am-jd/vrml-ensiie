@@ -1060,7 +1060,7 @@ DEF Animations Group {
 	    0 -0.00928 1 ]
 	}
 	DEF Walk_Time TimeSensor {
-	  cycleInterval 0.1
+	  cycleInterval 1
 	  startTime -1
 	  stopTime 0
 	  loop FALSE
@@ -1479,10 +1479,16 @@ Transform {
    ]
 }
 
+DEF Start_Time TimeSensor {
+	cycleInterval 6
+	loop TRUE
+}
+
 DEF yt_script Script {
    # Nodes
    field SFNode Walk_Time USE Walk_Time
    field SFNode Stand_Time USE Stand_Time
+   field SFNode Start_Time USE Start_Time
    
    # Humanoid root
    field SFNode hanim_HumanoidRoot USE hanim_HumanoidRoot
@@ -1506,10 +1512,10 @@ DEF yt_script Script {
    eventIn SFFloat startWalk
    eventIn SFBool continueWalk
    eventIn SFFloat stopWalk
+   eventIn SFBool start
    url ["yt.js"]
 }
 
 ROUTE capteur.touchTime TO yt_script.testWalk
 ROUTE Walk_Time.isActive TO yt_script.continueWalk
-
-
+ROUTE Start_Time.isActive TO yt_script.start

@@ -45029,11 +45029,17 @@ DEF cube1 Transform {
 DEF channelScript Script {
 	eventIn SFTime trigger
 	field SFInt32 channel 0
+	field SFBool on TRUE
 	field SFNode channelTexture USE channelTexture
 	url "javascript: var gifs = [\"textures/matrix-15.gif\", \"textures/8.gif\"];
 					 function trigger(time) {
-						channel = (channel + 1) % 2;
-						channelTexture.url = new MFString(gifs[channel]);
+						//channelTexture.set_url = new MFString(gifs[channel]);
+						if(on) {
+							channelTexture.set_stopTime = time;
+						} else {
+							channelTexture.set_startTime = time;
+						}
+						on = !on;
 					 }"
 }
 

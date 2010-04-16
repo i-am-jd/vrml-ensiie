@@ -189,3 +189,11 @@ function stopWalk(fraction, time) {
 		callPendingAction(time);
 	}	
 }
+
+var started = false;
+function start(b, time) {
+	if(!b && !started) {
+		started = true;
+		testWalk(time);
+	}
+}

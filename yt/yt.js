@@ -1,3 +1,109 @@
+//Path finfing
+function house1(time) { walkToCoords([0,0], time);}
+function door1(time) { walkToCoords([0,5], time); }
+function cross1(time) { walkToCoords([5, 5], time); }
+
+function house2(time) { walkToCoords([-20,0], time); }
+function door2(time) { walkToCoords([-20,5], time); }
+function cross2(time) { walkToCoords([5, 15], time); }
+
+function house3(time) { walkToCoords([0, 21], time); }
+function door3(time) { walkToCoords([0, 16], time); }
+function cross3(time) { walkToCoords([5, 16], time); }
+
+function house4(time) { walkToCoords([-20, 21], time); }
+function door4(time) { walkToCoords([-20, 16], time); }
+
+//Actions triggered when destination reached
+pendingActions = [];
+
+function testWalk(time) {
+	//walkToCoords(door1, time);
+	//pendingActions = pendingActions.concat(function(time) {walkToCoords(cross1, time);});
+	
+	// var waypoints = [];
+	// waypoints[0] = cross1;
+	// waypoints[1] = cross3;
+	// waypoints[2] = house3;
+	// //, cross3, door3, house3, door3, door4, house4);
+	// //Create an array of actions
+	var actions = [];
+	// for(var i=0; i< 3; i++) {
+		// actions[i] = function(time) {walkTo(waypoints[i][0], waypoints[i][1], time);};
+	// }
+	actions[0] = door1;
+	
+	// actions[1] = function(time) {
+		// var i = Math.floor(Math.random() * 2);
+		// if(i == 0) {
+			// return [cross1, cross3, cross1, door1, house1];
+		// } else {
+			// return [door4, house4];
+		// }
+	// }
+	
+	actions[1] = cross1;
+	actions[2] = cross3;
+	actions[3] = cross1;
+	actions[4] = door1;
+	actions[5] = house1;
+	
+	
+	//pendingActions = pendingActions.concat(actions);
+	
+	// Cycle these actions
+	cycleActions(actions);
+	callPendingAction(time);
+}
+
+function cycleActions(actions) {
+	var addActions = function(time) {
+		pendingActions = pendingActions.concat(actions);
+		pendingActions = pendingActions.concat(addActions);
+		callPendingAction(time);
+	}
+	
+	pendingActions = pendingActions.concat(actions);
+	pendingActions = pendingActions.concat(addActions);
+}
+
+function callPendingAction(time) {
+	if(pendingActions.length == 0)
+		return;
+
+	var action = pendingActions[0];
+	
+	if(action == null) {
+		pendingActions.shift();
+		return;
+	}
+	
+	//Multi-valued action
+	if(action instanceof Array) {
+		if(action.length > 0) {
+			var first = action.shift();
+			first(time);
+			return;
+		} else {
+			pendingActions.shift();
+			callPendingAction(time);
+		}
+	}
+	
+	//Single action, execute and inspect
+	var result = action(time);
+	
+	if(result instanceof Array && result.length > 0) {
+		//Several actions returned
+		pendingActions[0] = result;
+		callPendingAction(time);
+	} else {
+		pendingActions.shift();
+	}
+}
+
+//Update VRML animations
+
 function updateStandAnim() {
 	for(var i=0; i<3; i++) {
 		standBodyTran.keyValue[0][i] = hanim_HumanoidRoot.translation[i];
@@ -7,7 +113,7 @@ function updateStandAnim() {
 		standBodyRot.keyValue[0][i] = hanim_HumanoidRoot.rotation[i];
 		standBodyRot.keyValue[1][i] = hanim_HumanoidRoot.rotation[i];
 	}
-}	
+}
 
 function updateWalkAnim() {
 	var dx = Math.sin(currentAngle);
@@ -46,10 +152,8 @@ function walkTo(x1, z1, time) {
 	startWalk(angle, dist, time);
 }
 
-function testWalk(time) {
-	//startWalk(Math.PI/4, 10.5, time);
-	walkTo(10, 10, time);
-	//startWalk(Math.atan2(10, 10), 5.1);
+function walkToCoords(coords, time) {
+	walkTo(coords[0], coords[1], time);
 }
 
 function startWalk(angle, length, time) {
@@ -76,6 +180,7 @@ function continueWalk(b, time) {
 		} else {
 			updateStandAnim();
 			Stand_Time.set_startTime = time;
+			callPendingAction(time);
 		}
 		
     } else if(!b && cyclesNb > 0) {
@@ -95,6 +200,7 @@ function stopWalk(fraction, time) {
 		Browser.deleteRoute(Walk_Time, "fraction_changed", this, "stopWalk");
 		updateStandAnim();
 		Stand_Time.set_startTime = time;
-		cyclesFraction = 0.;		
+		cyclesFraction = 0.;
+		callPendingAction(time);
 	}	
 }

@@ -1,7 +1,10 @@
 #VRML V2.0 utf8
 #Exported from Wings 3D 1.2
-DEF cube4 Transform {
+DEF door Transform {
+	rotation 0 1 0 0
+	center 0.165 0 0.966
   children [
+	DEF capteur TouchSensor {}
     Shape {
       appearance Appearance {
         material DEF default Material {
@@ -245,3 +248,48 @@ DEF cube4 Transform {
   ]
 }
 
+DEF doorRotInterp OrientationInterpolator {
+	  key [ 0, 1 ]
+	  keyValue [ 0 1 0 0, 0 1 0 -1.57]
+}
+
+DEF doorRotTime TimeSensor {
+	cycleInterval 1
+	startTime -1
+	stopTime 0
+	loop FALSE
+}
+
+DEF switchDoor Script {
+	field SFBool opened FALSE
+	field SFBool blocked FALSE
+	field SFNode doorRotInterp USE doorRotInterp
+	field SFNode doorRotTime USE doorRotTime
+	field SFNode door USE door
+	
+	eventIn SFTime trigger
+	eventIn SFBool isActive
+	
+	url "javascript:function trigger(time) {
+						if(blocked)
+							return;
+						if(!opened) {
+							opened = true;
+							doorRotInterp.keyValue[0][3] = 0;
+							doorRotInterp.keyValue[1][3] = -1.57;
+						} else {
+							opened = false;
+							doorRotInterp.keyValue[0][3] = -1.57;
+							doorRotInterp.keyValue[1][3] = 0;
+						}
+						doorRotTime.set_startTime = time; 
+					}
+					function isActive(b) {
+						blocked = b;
+					}"
+}
+
+ROUTE doorRotInterp.value_changed TO door.set_rotation
+ROUTE doorRotTime.fraction_changed TO doorRotInterp.set_fraction
+ROUTE capteur.touchTime TO switchDoor.trigger
+ROUTE doorRotTime.isActive TO switchDoor.isActive

@@ -28,7 +28,7 @@ Group {
         }
                 
         Viewpoint {
-            position 0 1.1 0
+            position -4 1.1 9
             orientation 0 1 0 -1.57					#rotation selon y de -pi/2
             description "depart"
         }
@@ -117,13 +117,15 @@ Group {
         },
 		
 		Transform {
-			translation 2 0.01 -1
+			translation -3 0.01 7
+			scale 6 1 3
+			scaleOrientation 0 1 0 0
             children [
 
                 Shape {
                     appearance DEF road Appearance {
                         texture ImageTexture  {
-                            url ["./road.jpg"]
+                            url ["road.jpg"]
                         }
                         textureTransform TextureTransform {
                             scale 4 4 
@@ -145,27 +147,6 @@ Group {
             ]
         },
 		
-		Transform {
-			translation 5 0.01 -1
-            children [
-
-                Shape {
-                    appearance USE road
-                    geometry ElevationGrid {
-                        ccw FALSE              
-                        solid FALSE            
-                        xDimension 2          
-                        xSpacing 3             
-                        zDimension 2
-                        zSpacing 3
-                        height [
-                            0, 0,
-							0, 0
-                        ]
-                    }
-                }
-            ]
-        },
 		
 		Transform {
 			translation 8 0.01 -1
@@ -215,24 +196,46 @@ Group {
 	]
 }
 
-DEF yt Transform {
-   translation 2 0 0
-   rotation 0 1 0 0
-   children [
-      Inline {
-	 url ["yt/yt.wrl"]
-      }
-   ]
-}
+#DEF yt Transform {
+#   translation 2 0 0
+#   rotation 0 1 0 0
+#   children [
+#      Inline {
+#	 url ["yt/yt.wrl"]
+#      }
+#   ]
+#}
 
-DEF maison Transform {
-   translation 1 0 3
+Transform {
+   translation 0 0 0
    rotation 0 1 0 0
    scale 3 3 3
    scaleOrientation 0 1 0 0
    children [
-      Inline {
-	 url ["models/maison.wrl"]
-      }
+	DEF maison Inline { url ["models/maison.wrl"] },
+	DEF porte  Inline { url ["models/porte.wrl"] },
+	DEF win1   Inline { url ["models/win1.wrl"] },
+	DEF win2   Inline { url ["models/win2.wrl"] },
+	DEF win3   Inline { url ["models/win3.wrl"] },
+	DEF win4   Inline { url ["models/win4.wrl"] },
+	DEF win5   Inline { url ["models/win5.wrl"] },
+	DEF win6   Inline { url ["models/win6.wrl"] },
+	DEF win7   Inline { url ["models/win7.wrl"] },
+	DEF win8   Inline { url ["models/win8.wrl"] },
+	DEF win9   Inline { url ["models/win9.wrl"] },
    ]
 }
+
+Transform {
+   translation 0 0 22
+   rotation 0 1 0 3.14
+   scale 3 3 3
+   scaleOrientation 0 1 0 0
+   children [
+	USE maison,
+	USE porte,
+	USE win1, USE win2, USE win3, USE win4, USE win5, USE win6, USE win7, USE win8, USE win9
+   ]
+}
+
+

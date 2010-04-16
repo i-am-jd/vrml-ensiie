@@ -91,7 +91,7 @@ Transform {
    scaleOrientation 0 1 0 0
    children [
 	DEF maison Inline { url ["models/maison.wrl"] },
-	DEF porte  Inline { url ["models/porte.wrl"] },
+	Inline { url ["models/porte.wrl"] },
 	DEF win1   Inline { url ["models/win1.wrl"] },
 	DEF win2   Inline { url ["models/win2.wrl"] },
 	DEF win3   Inline { url ["models/win3.wrl"] },
@@ -111,7 +111,7 @@ Transform {
    scaleOrientation 0 1 0 0
    children [
 	USE maison,
-	USE porte,
+	Inline { url ["models/porte.wrl"] },
 	USE win1, USE win2, USE win3, USE win4, USE win5, USE win6, USE win7, USE win8, USE win9
    ]
 }
@@ -123,7 +123,7 @@ Transform {
    scaleOrientation 0 1 0 0
    children [
 	USE maison,
-	USE porte,
+	Inline { url ["models/porte.wrl"] },
 	USE win1, USE win2, USE win3, USE win4, USE win5, USE win6, USE win7, USE win8, USE win9
    ]
 }
@@ -135,7 +135,7 @@ Transform {
    scaleOrientation 0 1 0 0
    children [
 	USE maison,
-	USE porte,
+	Inline { url ["models/porte.wrl"] },
 	USE win1, USE win2, USE win3, USE win4, USE win5, USE win6, USE win7, USE win8, USE win9
    ]
 }
@@ -194,54 +194,62 @@ Transform {
 
 Transform {
 	scale 0.1 0.1 0.1
-	translation 16 0 0
+	translation -16 0 0
 	children [ USE tree6 ]
 }
 
 Transform {
 	scale 0.1 0.1 0.1
-	translation 16 0 -2.5
+	translation -16 0 -2.5
 	children [ USE tree6 ]
 }
 
 Transform {
 	scale 0.1 0.1 0.1
-	translation 16 0 2.5
+	translation -16 0 2.5
 	children [ USE tree6 ]
 }
 
 Transform {
 	scale 0.1 0.1 0.1
-	translation -4 0 0
+	translation -4 0 18.5
 	children [ USE tree6 ]
 }
 
 Transform {
 	scale 0.1 0.1 0.1
-	translation -4 0 -2.5
+	translation -4 0 21
 	children [ USE tree6 ]
 }
 
 Transform {
 	scale 0.1 0.1 0.1
-	translation -4 0 2.5
+	translation -4 0 23.5
 	children [ USE tree6 ]
 }
 
 Transform {
 	scale 0.1 0.1 0.1
-	translation 16 0 0
+	translation -16 0 18.5
 	children [ USE tree6 ]
 }
 
 Transform {
 	scale 0.1 0.1 0.1
-	translation 16 0 -2.5
+	translation -16 0 21
 	children [ USE tree6 ]
 }
 
 Transform {
 	scale 0.1 0.1 0.1
-	translation 16 0 2.5
+	translation -16 0 23.5
 	children [ USE tree6 ]
+}
+
+Transform {
+	scale 2 2 2
+	scaleOrientation 0 1 0 0
+	translation 20 0 10
+	rotation 0 1 0 -1.57
+	children [ Inline { url "models/cinema.wrl" } ]
 }

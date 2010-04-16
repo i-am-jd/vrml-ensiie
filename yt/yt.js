@@ -18,41 +18,18 @@ function door4(time) { walkToCoords([-20, 16], time); }
 pendingActions = [];
 
 function testWalk(time) {
-	//walkToCoords(door1, time);
-	//pendingActions = pendingActions.concat(function(time) {walkToCoords(cross1, time);});
-	
-	// var waypoints = [];
-	// waypoints[0] = cross1;
-	// waypoints[1] = cross3;
-	// waypoints[2] = house3;
-	// //, cross3, door3, house3, door3, door4, house4);
-	// //Create an array of actions
-	var actions = [];
-	// for(var i=0; i< 3; i++) {
-		// actions[i] = function(time) {walkTo(waypoints[i][0], waypoints[i][1], time);};
-	// }
-	actions[0] = door1;
-	
-	// actions[1] = function(time) {
-		// var i = Math.floor(Math.random() * 2);
-		// if(i == 0) {
-			// return [cross1, cross3, cross1, door1, house1];
-		// } else {
-			// return [door4, house4];
-		// }
-	// }
-	
-	actions[1] = cross1;
-	actions[2] = cross3;
-	actions[3] = cross1;
-	actions[4] = door1;
-	actions[5] = house1;
-	
-	
-	//pendingActions = pendingActions.concat(actions);
-	
-	// Cycle these actions
-	cycleActions(actions);
+	defaultActions = [];
+	defaultActions[0] = door1;
+	defaultActions[1] = function(time) {
+		var i = Math.floor(Math.random() * 2);
+		if(i == 0) {
+			return [cross1, cross3, door3, house3, door3, cross3, cross1, door1, house1];
+		} else {
+			return [door2, house2, door2, door1, house1];
+		}
+	}
+
+	pendingActions = pendingActions.concat(defaultActions);
 	callPendingAction(time);
 }
 
@@ -68,8 +45,9 @@ function cycleActions(actions) {
 }
 
 function callPendingAction(time) {
-	if(pendingActions.length == 0)
+	if(pendingActions.length == 0) {
 		return;
+	}
 
 	var action = pendingActions[0];
 	
@@ -82,11 +60,13 @@ function callPendingAction(time) {
 	if(action instanceof Array) {
 		if(action.length > 0) {
 			var first = action.shift();
+			pendingActions[0] = action;
 			first(time);
 			return;
 		} else {
 			pendingActions.shift();
 			callPendingAction(time);
+			return;
 		}
 	}
 	

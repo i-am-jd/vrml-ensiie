@@ -1,0 +1,1515 @@
+#VRML V2.0 utf8 eMpTyWorlds V3.29.70
+
+DEF YT_WorldInfo Group
+{
+	children [
+		WorldInfo
+		{
+			title "Y.T."
+			info [ "
+
+This is a H-Anim 1.1 Compliant Humaniod
+
+Name:
+	Y.T.
+H-Anim 1.0 Beta Creation Date:
+	July 16, 1997
+H-Anim 1.0 Compliant Modification Date:
+	August 15, 1997
+H-Anim 1.1 Compliant Modification Date:
+	July 15, 1998
+Other Modifications:
+	September, 2 1997 - Added Level of Detail nodes
+	March 13, 2001 - Updated for Web3D.org SDK CDROM
+H-Anim 1.1 Scene Graph Copyright:
+	Copyright (C) 1998-2001 Matthew T. Beitler
+Geometry Copyright:
+	Copyright (C) 1996 Acuris Inc.
+	The original geometry used for this model was
+	of Acuris' Ideal Woman...  The orginal data was
+	in .3ds form and I converted the geometry to VRML 
+	and added the appropriate Joint/Segment/Humaniod 
+	information to make it compliant with the HANIM 
+	Version 1.0 specification (and eventually
+	H-Anim 1.1)...
+	According to my license agreement I am allowed to 
+	use this on my web pages, alter it, as long as the
+	original reference to Acuris is retained...  However
+	unless you have purchased the Perfect People models
+	from Acuris, you will be in violation of their
+	copyright if you use it directly on your web pages...
+	So that give you 2 options:
+	1) Buy 18 Perfect People from Acuris...
+		The cost was 399 dollars, so unless you are
+		a cheap ass, just buy it from them, it is 
+		worth it...
+	2) Make a reference to my copy of the model
+		with an Inline or externProto type
+		mechanism...  For as long as I am able, a 
+		copy of this model will exist at the original
+		URL listed below...  If for any reason it
+		disappears from that site, look for it on my 
+		web pages at UPenn...  This option is ok if 
+		you are a graduate student or just generally
+		poor!:~)...
+	For more information on the Ideal Woman and other
+	Perfect People models:
+		http://www.acuris.com/
+	Oh, and incase any Acuris folks are reading this
+	I'd consider allowing you to include my model on
+	your Perfect People CDROM (for a small fee!:~)...
+	Graduate students have to eat too you know...
+H-Anim 1.1 Scene Graph Usage Restrictions: 
+	Released under GNU General Public License
+H-Anim 1.1 Author name:
+	eMpTy (a.k.a. Matthew T. Beitler)
+H-Anim 1.1 Author email:
+	beitler@graphics.cis.upenn.edu or beitler@acm.org
+H-Anim 1.1 Author homepage:
+	http://www.cis.upenn.edu/~beitler
+H-Anim 1.1 Original URL:
+	http://www.asel.udel.edu/~beitler/vrml/human/yt/yt.wrl
+Other H-Anim Models by eMpTy:
+	http://www.cis.upenn.edu/~beitler/H-Anim
+H-Anim Information:
+	http://H-Anim.org/
+			"]
+		}
+	]
+}
+
+PROTO Humanoid [
+	field         SFVec3f     bboxCenter           0 0 0
+	field         SFVec3f     bboxSize             -1 -1 -1
+	exposedField  SFVec3f     center               0 0 0
+	exposedField  MFNode      humanoidBody         [ ]
+	exposedField  MFString    info                 [ ]
+	exposedField  MFNode      joints               [ ]
+	exposedField  SFString    name                 ""
+	exposedField  SFRotation  rotation             0 0 1 0
+	exposedField  SFVec3f     scale                1 1 1
+	exposedField  SFRotation  scaleOrientation     0 0 1 0
+	exposedField  MFNode      segments             [ ]
+	exposedField  MFNode      sites                [ ]
+	exposedField  SFVec3f     translation          0 0 0
+	exposedField  SFString    version              "1.1"
+	exposedField  MFNode      viewpoints           [ ]
+]
+{
+	Transform {
+		bboxCenter        IS bboxCenter
+		bboxSize          IS bboxSize
+		center            IS center
+		rotation          IS rotation
+		scale             IS scale
+		scaleOrientation  IS scaleOrientation
+		translation      IS translation
+		children [
+			Group {
+				children IS viewpoints
+			}
+			Group {
+				children IS humanoidBody
+			}
+		]
+	}
+}
+
+PROTO Joint [
+	exposedField  SFVec3f     center               0 0 0
+	exposedField  MFNode      children             []
+	exposedField  MFFloat     llimit               []
+	exposedField  SFRotation  limitOrientation     0 0 1 0
+	exposedField  SFString    name                 ""
+	exposedField  SFRotation  rotation             0 0 1 0
+	exposedField  SFVec3f     scale                1 1 1
+	exposedField  SFRotation  scaleOrientation     0 0 1 0
+	exposedField  MFFloat     stiffness            [ 0 0 0 ]
+	exposedField  SFVec3f     translation          0 0 0
+	exposedField  MFFloat     ulimit               [ ]
+]
+{
+	Transform {
+		translation       IS translation
+		rotation          IS rotation
+		scale             IS scale
+		scaleOrientation  IS scaleOrientation
+		center            IS center
+		children          IS children
+	}
+}
+
+PROTO Segment [
+	field         SFVec3f     bboxCenter           0 0 0
+	field         SFVec3f     bboxSize             -1 -1 -1
+	exposedField  SFVec3f     centerOfMass         0 0 0
+	exposedField  MFNode      children             [ ]
+	exposedField  SFNode      coord                NULL
+	exposedField  MFNode      displacers           [ ]
+	exposedField  SFFloat     mass                 0 
+	exposedField  MFFloat     momentsOfInertia     [ 0 0 0 0 0 0 0 0 0 ]
+	exposedField  SFString    name                 ""
+	eventIn       MFNode      addChildren
+	eventIn       MFNode      removeChildren
+]
+{
+	Group {
+		addChildren    IS addChildren
+		bboxCenter     IS bboxCenter
+		bboxSize       IS bboxSize
+		children       IS children
+		removeChildren IS removeChildren
+	}
+}
+
+PROTO Site [
+	exposedField    SFVec3f     center           0 0 0
+	exposedField    MFNode      children         []
+	exposedField    SFString    name             ""
+	exposedField    SFRotation  rotation         0 0 1 0
+	exposedField    SFVec3f     scale            1 1 1
+	exposedField    SFRotation  scaleOrientation 0 0 1 0
+	exposedField    SFVec3f     translation      0 0 0
+	eventIn         MFNode      addChildren 
+	eventIn         MFNode      removeChildren
+]
+{
+	Transform {
+		addChildren       IS addChildren
+		center            IS center 
+		children          IS children
+		removeChildren    IS removeChildren
+		rotation          IS rotation
+		scale             IS scale
+		scaleOrientation  IS scaleOrientation
+		translation       IS translation
+	}
+}
+
+NavigationInfo
+{
+	headlight TRUE
+	speed 1.0
+	type "EXAMINE"
+}
+
+DEF humanoid Humanoid {
+	version "1.1"
+	name "humanoid"
+	info [
+		"authorName=Matthew T. Beitler (a.k.a. - eMpTy)"
+		"authorEmail=beitler@graphics.cis.upenn.edu or beitler@acm.org"
+		"creationDate=07/15/98"
+		"copyright=H-Anim 1.1 Scene Graph Copyright (C) 1998-2001, Matthew T. Beitler"
+		"humanoidVersion=Y.T. 006"
+		"usageRestrictions=See the WorldInfo at the top of this file"
+	]
+	humanoidBody [
+		DEF hanim_HumanoidRoot Joint {
+ 			name "HumanoidRoot"
+			center 0 0.9343 -0.1642
+			rotation 0 1 0 0
+			children [
+				DEF hanim_sacroiliac Joint {
+					name "sacroiliac"
+					llimit [-0.000776 0 -0.000265]
+					ulimit [0.000776 0 0.000265]
+					center 0.00 0.9343 0.023
+					rotation 0 0 1 0
+					children [
+						DEF hanim_pelvis Segment {
+							name "pelvis"
+							children [
+								LOD {
+									range [ 10 30 ]
+									level [
+										DEF hanim_pelvis_high Inline { url "pelvis.wrl" }
+										DEF hanim_pelvis_medium Inline { url "pelvis2.wrl" }
+										DEF hanim_pelvis_low Inline { url "pelvis2.wrl" }
+									]
+								}
+							]
+						}     # hanim_pelvis Segment END
+						DEF hanim_l_hip Joint {
+							name "l_hip"
+							llimit [-2.0420352 -0.6981317 -0.17453293]
+							ulimit [0.29670597 0.87266463 0.52359878]
+							center 0.076 0.893 -0.045
+							rotation 0 0 1 0
+							children [
+								DEF hanim_l_thigh Segment {
+									name "l_thigh"
+									children [
+										LOD {
+											range [ 10 30 ]
+											level [
+												DEF hanim_l_thigh_high Inline { url "l_thigh.wrl" }
+												DEF hanim_l_thigh_medium Inline { url "l_thigh2.wrl" }
+												DEF hanim_l_thigh_low Inline { url "l_thigh2.wrl" }
+											]
+										}
+									]
+								}     # hanim_l_thigh Segment END
+								DEF hanim_l_knee Joint {
+									name "l_knee"
+									llimit [0 0 0]
+									ulimit [1.9198622 0 0]
+									center 0.0630 0.4220 -0.0195
+									rotation 0 0 1 0
+									children [
+										DEF hanim_l_calf Segment {
+											name "l_calf"
+											children [
+												LOD {
+													range [ 10 30 ]
+													level [
+														DEF hanim_l_calf_high Inline { url "l_calf.wrl" }
+														DEF hanim_l_calf_medium Inline { url "l_calf2.wrl" }
+														DEF hanim_l_calf_low Inline { url "l_calf2.wrl" }
+													]
+												}
+											]
+										}     # hanim_l_calf Segment END
+										DEF hanim_l_ankle Joint {
+											name "l_ankle"
+											llimit [-0.43633231 -1.0995574 -0.68067841]
+											ulimit [1.3892821 0.95993109 0.61086524]
+											center 0.0855 0.0745 -0.0485
+											rotation 0 0 1 0
+											children [
+												DEF hanim_l_hindfoot Segment {
+													name "l_hindfoot"
+													children [
+														LOD {
+															range [ 10 30 ]
+															level [
+																DEF hanim_l_hindfoot_high Inline { url "l_hindfoot.wrl" }
+																DEF hanim_l_hindfoot_medium Inline { url "l_hindfoot2.wrl" }
+																DEF hanim_l_hindfoot_low Inline { url "l_hindfoot2.wrl" }
+															]
+														}
+													]
+												}     # hanim_l_hindfoot Segment END 
+											]
+										}     # hanim_l_ankle Joint END
+									]
+								}     # hanim_l_knee Joint END
+							] 
+						}     # hanim_l_hip Joint END
+						DEF hanim_r_hip Joint {
+							name "r_hip"
+							llimit [-2.0420352 -0.87266463 -0.52359878]
+							ulimit [0.29670597 0.6981317 0.17453293]
+							center -0.076 0.893 -0.045
+							rotation 0 0 1 0
+							children [
+								DEF hanim_r_thigh Segment {
+									name "r_thigh"
+									children [
+										LOD {
+											range [ 10 30 ]
+											level [
+												DEF hanim_r_thigh_high Inline { url "r_thigh.wrl" }
+												DEF hanim_r_thigh_medium Inline { url "r_thigh2.wrl" }
+												DEF hanim_r_thigh_low Inline { url "r_thigh2.wrl" }
+											]
+										}
+									]
+								}      # r_thigh Segment END
+								DEF hanim_r_knee Joint {
+									name "r_knee"
+									llimit [0 0 0]
+									ulimit [1.9198622 0 0]
+									center -0.0630 0.4220 -0.0195
+									rotation 0 0 1 0
+									children [
+										DEF hanim_r_calf Segment {
+											name "r_calf"
+											children [
+												LOD {
+													range [ 10 30 ]
+													level [
+														DEF hanim_r_calf_high Inline { url "r_calf.wrl" }
+														DEF hanim_r_calf_medium Inline { url "r_calf2.wrl" }
+														DEF hanim_r_calf_low Inline { url "r_calf2.wrl" }
+													]
+												}
+											]
+										}      # r_calf Segment END
+										DEF hanim_r_ankle Joint {
+											name "r_ankle"
+											llimit [-0.43633231 -0.95993109 -0.61086524]
+											ulimit [1.3892821 1.0995574 0.68067841]
+											center -0.0855 0.0745 -0.0485
+											rotation 0 0 1 0
+											children [
+												DEF hanim_r_hindfoot Segment {
+													name "r_hindfoot"
+													children [
+														LOD {
+															range [ 10 30 ]
+															level [
+																DEF hanim_r_hindfoot_high Inline { url "r_hindfoot.wrl" }
+																DEF hanim_r_hindfoot_medium Inline { url "r_hindfoot2.wrl" }
+																DEF hanim_r_hindfoot_low Inline { url "r_hindfoot2.wrl" }
+															]
+														}
+													]
+												}     # hanim_r_hindfoot Segment END
+											]
+										}     # hanim_r_ankle Joint END
+									]
+								}     # hanim_r_knee Joint END
+							]
+						}     # hanim_r_hip END
+					]
+				}     # hanim_sacroiliac END
+				DEF hanim_vl5 Joint {
+					name "vl5"
+					llimit [-0.17453293 -0.78539816 -0.6981317]
+					ulimit [2.5132741 0.78539816 0.6981317]
+					center 0.00 1.0250 0.0230
+					rotation 0 0 1 0
+					children [
+						DEF hanim_l5 Segment {
+							name "l5"
+							children [
+								LOD {
+									range [ 10 30 ]
+									level [
+										DEF hanim_l5_high Inline { url "l5.wrl" }
+										DEF hanim_l5_medium Inline { url "l5_2.wrl" }
+										DEF hanim_l5_low Inline { url "l5_2.wrl" }
+									]
+								}
+							]
+						}     # hanim_l5 Segment END
+						DEF hanim_l_shoulder Joint {
+							name "l_shoulder"
+							llimit [-3.5953783 -0.54105207 -0.21380283]
+							ulimit [1.1170107 1.0725048 2.9286625]
+							center 0.1305 1.3150 -0.0160
+							rotation 0 0 1 0
+							children [
+								DEF hanim_l_upperarm Segment {
+									name "l_upperarm"
+									children [
+										LOD {
+											range [ 10 30 ]
+											level [
+												DEF hanim_l_upperarm_high Inline { url "l_upperarm.wrl" }
+												DEF hanim_l_upperarm_medium Inline { url "l_upperarm2.wrl" }
+												DEF hanim_l_upperarm_low Inline { url "l_upperarm2.wrl" }
+											]
+										}
+									]
+								}     # hanim_l_upperarm Segment END
+								DEF hanim_l_elbow Joint {
+									name "l_elbow"
+									llimit [-2.6136306 0 0]
+									ulimit [0 0 0]
+									center 0.197 1.0640 -0.0215
+									rotation 0 0 1 0
+									children [
+										DEF hanim_l_forearm Segment {
+											name "l_forearm"
+											children [
+												LOD {
+													range [ 10 30 ]
+													level [
+														DEF hanim_l_forearm_high Inline { url "l_forearm.wrl" }
+														DEF hanim_l_forearm_medium Inline { url "l_forearm2.wrl" }
+														DEF hanim_l_forearm_low Inline { url "l_forearm2.wrl" }
+													]
+												}
+											]
+										}     # hanim_l_forearm Segment END
+										DEF hanim_l_wrist Joint {
+											name "l_wrist"
+											llimit [-0.78539816 -1.6545721 -1.4835299]
+											ulimit [0.78539816 1.5707963 1.7453293]
+											center 0.2845 0.8600 0.0295
+											rotation 0 0 1 0
+											children [
+												DEF hanim_l_hand Segment {
+													name "l_hand"
+													children [
+														LOD {
+															range [ 10 30 ]
+															level [
+																DEF hanim_l_hand_high Inline { url "l_hand.wrl" }
+																DEF hanim_l_hand_medium Inline { url "l_hand2.wrl" }
+																DEF hanim_l_hand_low Inline { url "l_hand2.wrl" }
+															]
+														}
+													]
+												}     # hanim_l_hand Segment END
+											]
+										}     # hanim_l_wrist Joint END
+									]
+								}     # hanim_l_elbow Joint END
+							]
+						}     # hanim_l_shoulder Joint END
+						DEF hanim_r_shoulder Joint {
+							name "r_shoulder"
+							llimit [-3.5953783 -1.0725048 -2.9286625]
+							ulimit [1.1170107 0.54105207 0.21380283]
+							center -0.1305 1.3150 -0.0160
+							rotation 0 0 1 0
+							children [
+								DEF hanim_r_upperarm Segment {
+									name "r_upperarm"
+									children [
+										LOD {
+											range [ 10 30 ]
+											level [
+												DEF hanim_r_upperarm_high Inline { url "r_upperarm.wrl" }
+												DEF hanim_r_upperarm_medium Inline { url "r_upperarm2.wrl" }
+												DEF hanim_r_upperarm_low Inline { url "r_upperarm2.wrl" }
+											]
+										}
+									]
+								}     # hanim_r_upperarm Segment END
+								DEF hanim_r_elbow Joint {
+								 name "r_elbow"
+									llimit [-2.6136306 0 0]
+									ulimit [0 0 0]
+									center -0.197 1.0640 -0.0215
+									rotation 0 0 1 0
+									children [
+										DEF hanim_r_forearm Segment {
+											name "r_forearm"
+											children [
+												LOD {
+													range [ 10 30 ]
+													level [
+														DEF hanim_r_forearm_high Inline { url "r_forearm.wrl" }
+														DEF hanim_r_forearm_medium Inline { url "r_forearm2.wrl" }
+														DEF hanim_r_forearm_low Inline { url "r_forearm2.wrl" }
+													]
+												}
+											]
+										}     # hanim_r_forearm Segment END
+										DEF hanim_r_wrist Joint {
+											name "r_wrist"
+											llimit [-0.78539816 -1.5707963 -1.7453293]
+											ulimit [0.78539816 1.6545721 1.4835299]
+											center -0.2845 0.8600 0.0295
+											rotation 0 0 1 0
+											children [
+												DEF hanim_r_hand Segment {
+													name "r_hand"
+													children [
+														LOD {
+															range [ 10 30 ]
+															level [
+																DEF hanim_r_hand_high Inline { url "r_hand.wrl" }
+																DEF hanim_r_hand_medium Inline { url "r_hand2.wrl" }
+																DEF hanim_r_hand_low Inline { url "r_hand2.wrl" }
+															]
+														}
+													]
+												}     # hanim_r_hand Segment END
+											]
+										}     # hanim_r_wrist Joint END
+									]
+								}     # hanim_r_elbow Joint END
+							]
+						}     # hanim_r_shoulder Joint END
+						DEF hanim_vc7 Joint {
+							name "vc7"
+							llimit [-0.34906585 -0.52359878 -0.59341195]
+							ulimit [0.78539816 0.52359878 0.59341195]
+							center 0 1.3685 0
+							rotation 0 0 1 0
+							children [
+								DEF hanim_c7 Segment {
+									name "c7"
+									children [
+										LOD {
+											range [ 10 30 ]
+											level [
+												DEF hanim_c7_high Inline { url "c7.wrl" }
+												DEF hanim_c7_medium Inline { url "c7_2.wrl" }
+												DEF hanim_c7_low Inline { url "c7_2.wrl" }
+											]
+										}
+									]
+								}     # hanim_c7 Segment END
+								DEF hanim_skullbase Joint {
+									name "skullbase"
+									llimit [-0.89884456 -0.75921822 -0.41015237]
+									ulimit [0.45029495 0.75921822 0.41015237]
+									center 0 1.4305 0
+									rotation 0 0 1 0
+									children [
+										DEF hanim_skull Segment {
+											name "skull"
+											children [
+												LOD {
+													range [ 10 30 ]
+													level [
+														DEF hanim_skull_high Inline { url "skull.wrl" }
+														DEF hanim_skull_medium Inline { url "skull2.wrl" }
+														DEF hanim_skull7_low Inline { url "skull2.wrl" }
+													]
+												}
+												DEF LeftEyeView Viewpoint
+												{
+													position 1 1 1
+													orientation 0 0 0 1.0
+													fieldOfView 0.785
+													description "Left Eye View"
+													jump TRUE
+												}
+												DEF RightEyeView Viewpoint
+												{
+													position 1 1 1
+													orientation 0 0 0 1.0
+													fieldOfView 0.785
+													description "Right Eye View"
+													jump TRUE
+												}
+												DEF CyclopeanView Viewpoint
+												{
+													position 1 1 1
+													orientation 0 0 0 1.0
+													fieldOfView 0.785
+													description "Cyclopean View"
+													jump TRUE
+												}
+											]
+										}     # hanim_skull Segment END
+									]
+								}     # hanim_skullbase Joint	 END
+						 ]
+						}     # hanim_vc7 Joint END
+					]
+				}     # hanim_vl5 Joint END
+			]
+		} #end HumanoidRoot
+	]
+	joints [ 
+		USE hanim_HumanoidRoot,
+			USE hanim_sacroiliac,
+				USE hanim_l_hip, USE hanim_l_knee, USE hanim_l_ankle,
+				USE hanim_r_hip, USE hanim_r_knee, USE hanim_r_ankle,
+			USE hanim_vl5,
+				USE hanim_vc7, USE hanim_skullbase,
+				USE hanim_l_shoulder, USE hanim_l_elbow, USE hanim_l_wrist,
+				USE hanim_r_shoulder, USE hanim_r_elbow, USE hanim_r_wrist
+	]
+	segments [
+		USE hanim_pelvis,
+			USE hanim_l_thigh, USE hanim_l_calf, USE hanim_l_hindfoot,
+			USE hanim_r_thigh, USE hanim_r_calf, USE hanim_r_hindfoot,
+		USE hanim_l5,
+			USE hanim_c7, USE hanim_skull,
+			USE hanim_l_upperarm, USE hanim_l_forearm, USE hanim_l_hand,
+			USE hanim_r_upperarm, USE hanim_r_forearm, USE hanim_r_hand
+	]
+	sites [
+	]
+	viewpoints [
+		DEF InclinedView Viewpoint
+		{
+			position 1.500 2.700 2.000
+			orientation -1.1 1.3 0.4 0.85
+			fieldOfView 0.785
+			description "Inclined View"
+			jump TRUE
+		}
+		DEF FrontView Viewpoint
+		{
+			position 0 0.900 2.600
+			orientation 0.0 0.0 0.0 1.0
+			fieldOfView 0.785
+			description "Front View"
+			jump TRUE
+		}
+		DEF SideView Viewpoint
+		{
+			position 2.600 0.900 0.000
+			orientation 0 1.0 0.0 1.57
+			fieldOfView 0.785
+			description "Side View"
+			jump TRUE
+		}
+		DEF TopView Viewpoint
+		{
+			position 0.000 2.500 0.000
+			orientation -1.0 0.0 0.0 1.57
+			fieldOfView 0.785
+			description "Top View"
+			jump TRUE
+		}
+		DEF FaceView Viewpoint
+		{
+			position 0 1.750 0.400
+			orientation 0.0 0.0 0.0 1.0
+			fieldOfView 0.785
+			description "Face View"
+			jump TRUE
+		}
+		DEF BackView Viewpoint
+		{
+			position 0 0.900 -2.600
+			orientation 0.0 1.0 0.0 3.14
+			fieldOfView 0.785
+			description "Back View"
+			jump TRUE
+		}
+		DEF LeftView Viewpoint
+		{
+			position -2.600 0.900 0.000
+			orientation 0 1.0 0.0 -1.57
+			fieldOfView 0.785
+			description "Left View"
+			jump TRUE
+		}
+		DEF RightView Viewpoint 
+		{
+			position 2.600 0.900 0.000
+			orientation 0 1.0 0.0 1.57
+			fieldOfView 0.785398
+			description "Right View"
+			jump TRUE
+		}
+		DEF BottomView Viewpoint
+		{
+			position 0.000 -0.500 0.000
+			orientation 1.0 0.0 0.0 1.57
+			fieldOfView 0.785
+			description "Bottom View"
+			jump TRUE
+		}
+		DEF VeryFarView Viewpoint
+		{
+			position 0 0.900 30.00
+			orientation 0.0 0.0 0.0 1.0
+			fieldOfView 0.785
+			description "Very Far View"
+			jump TRUE
+		}
+		DEF FarView Viewpoint
+		{
+			position 0 0.900 10.00
+			orientation 0.0 0.0 0.0 1.0
+			fieldOfView 0.785
+			description "Far View"
+			jump TRUE
+		}
+	]
+}     #end humanoid Humanoid
+
+
+#
+#  All Data below is not part of the H-Anim Compliant Human
+#  figure definition, but is used to make adding animations
+#  to the file easier
+#
+
+
+#
+#  The following "NotIncludedGroup" is my own little 
+#  fix for applying interpolators to HANIM humanoids which 
+#  do not implement all of the joints in the specification...  
+#  If a joint is not defined and an interpolator is ROUTEd to 
+#  that name, it is an error...  In this case, if an interpolator 
+#  is ROUTEd to the joint, it will just do nothing, but it will 
+#  not cause an error...
+#
+#  My real hope someday is to create an intelligent piece of 
+#  code to sit between the interpolators (or whereever the input
+#  data is coming from) and the humanoid figure which would 
+#  figure out how much the joints (which were implemented in the
+#  figure) needed to be moved to make up for the non-existant 
+#  joints.........but that is another project.......
+#                - eMpTy
+#
+
+
+DEF NotIncludedGroup Group {
+	children [
+		DEF hanim_vl4 Joint {}    # NotIncluded
+		DEF hanim_vl3 Joint {}    # NotIncluded
+		DEF hanim_vl2 Joint {}    # NotIncluded
+		DEF hanim_vl1 Joint {}    # NotIncluded
+		DEF hanim_vt12 Joint {}    # NotIncluded
+		DEF hanim_vt11 Joint {}    # NotIncluded
+		DEF hanim_vt10 Joint {}    # NotIncluded
+		DEF hanim_vt9 Joint {}    # NotIncluded
+		DEF hanim_vt8 Joint {}    # NotIncluded
+		DEF hanim_vt7 Joint {}    # NotIncluded
+		DEF hanim_vt6 Joint {}    # NotIncluded
+		DEF hanim_vt5 Joint {}    # NotIncluded
+		DEF hanim_vt4 Joint {}    # NotIncluded
+		DEF hanim_vt3 Joint {}    # NotIncluded
+		DEF hanim_vt2 Joint {}    # NotIncluded
+		DEF hanim_vt1 Joint {}    # NotIncluded
+		DEF hanim_vc6 Joint {}    # NotIncluded
+		DEF hanim_vc5 Joint {}    # NotIncluded
+		DEF hanim_vc4 Joint {}    # NotIncluded
+		DEF hanim_vc3 Joint {}    # NotIncluded
+		DEF hanim_vc2 Joint {}    # NotIncluded
+		DEF hanim_vc1 Joint {}    # NotIncluded
+		DEF hanim_l_sternoclavicular Joint {}    # NotIncluded
+		DEF hanim_l_acromioclavicular Joint {}    # NotIncluded
+		DEF hanim_l_thumb1 Joint {}    # NotIncluded
+		DEF hanim_l_thumb2 Joint {}    # NotIncluded
+		DEF hanim_l_thumb3 Joint {}    # NotIncluded
+		DEF hanim_l_index1 Joint {}    # NotIncluded
+		DEF hanim_l_index2 Joint {}    # NotIncluded
+		DEF hanim_l_index3 Joint {}    # NotIncluded
+		DEF hanim_l_middle1 Joint {}    # NotIncluded
+		DEF hanim_l_middle2 Joint {}    # NotIncluded
+		DEF hanim_l_middle3 Joint {}    # NotIncluded
+		DEF hanim_l_ring1 Joint {}    # NotIncluded
+		DEF hanim_l_ring2 Joint {}    # NotIncluded
+		DEF hanim_l_ring3 Joint {}    # NotIncluded
+		DEF hanim_l_pinky1 Joint {}    # NotIncluded
+		DEF hanim_l_pinky2 Joint {}    # NotIncluded
+		DEF hanim_l_pinky3 Joint {}    # NotIncluded
+		DEF hanim_r_sternoclavicular Joint {}    # NotIncluded
+		DEF hanim_r_acromioclavicular Joint {}    # NotIncluded
+		DEF hanim_r_thumb1 Joint {}    # NotIncluded
+		DEF hanim_r_thumb2 Joint {}    # NotIncluded
+		DEF hanim_r_thumb3 Joint {}    # NotIncluded
+		DEF hanim_r_index1 Joint {}    # NotIncluded
+		DEF hanim_r_index2 Joint {}    # NotIncluded
+		DEF hanim_r_index3 Joint {}    # NotIncluded
+		DEF hanim_r_middle1 Joint {}    # NotIncluded
+		DEF hanim_r_middle2 Joint {}    # NotIncluded
+		DEF hanim_r_middle3 Joint {}    # NotIncluded
+		DEF hanim_r_ring1 Joint {}    # NotIncluded
+		DEF hanim_r_ring2 Joint {}    # NotIncluded
+		DEF hanim_r_ring3 Joint {}    # NotIncluded
+		DEF hanim_r_pinky1 Joint {}    # NotIncluded
+		DEF hanim_r_pinky2 Joint {}    # NotIncluded
+		DEF hanim_r_pinky3 Joint {}    # NotIncluded
+		DEF hanim_l_subtalar Joint {}    # NotIncluded
+		DEF hanim_l_midtarsal Joint {}    # NotIncluded
+		DEF hanim_l_metatarsal Joint {}    # NotIncluded
+		DEF hanim_r_subtalar Joint {}    # NotIncluded
+		DEF hanim_r_midtarsal Joint {}    # NotIncluded
+		DEF hanim_r_metatarsal Joint {}    # NotIncluded
+		DEF hanim_l4 Segment {}    # NotIncluded
+		DEF hanim_l3 Segment {}    # NotIncluded
+		DEF hanim_l2 Segment {}    # NotIncluded
+		DEF hanim_l1 Segment {}    # NotIncluded
+		DEF hanim_t12 Segment {}    # NotIncluded
+		DEF hanim_t11 Segment {}    # NotIncluded
+		DEF hanim_t10 Segment {}    # NotIncluded
+		DEF hanim_t9 Segment {}    # NotIncluded
+		DEF hanim_t8 Segment {}    # NotIncluded
+		DEF hanim_t7 Segment {}    # NotIncluded
+		DEF hanim_t6 Segment {}    # NotIncluded
+		DEF hanim_t5 Segment {}    # NotIncluded
+		DEF hanim_t4 Segment {}    # NotIncluded
+		DEF hanim_t3 Segment {}    # NotIncluded
+		DEF hanim_t2 Segment {}    # NotIncluded
+		DEF hanim_t1 Segment {}    # NotIncluded
+		DEF hanim_c6 Segment {}    # NotIncluded
+		DEF hanim_c5 Segment {}    # NotIncluded
+		DEF hanim_c4 Segment {}    # NotIncluded
+		DEF hanim_c3 Segment {}    # NotIncluded
+		DEF hanim_c2 Segment {}    # NotIncluded
+		DEF hanim_c1 Segment {}    # NotIncluded
+		DEF hanim_l_clavicle Segment {}    # NotIncluded
+		DEF hanim_l_scapula Segment {}    # NotIncluded
+		DEF hanim_l_thumb_metacarpal Segment {}    # NotIncluded
+		DEF hanim_l_thumb_proximal Segment {}    # NotIncluded
+		DEF hanim_l_thumb_distal Segment {}    # NotIncluded
+		DEF hanim_l_index_proximal Segment {}    # NotIncluded
+		DEF hanim_l_index_middle Segment {}    # NotIncluded
+		DEF hanim_l_index_distal Segment {}    # NotIncluded
+		DEF hanim_l_middle_proximal Segment {}    # NotIncluded
+		DEF hanim_l_middle_middle Segment {}    # NotIncluded
+		DEF hanim_l_middle_distal Segment {}    # NotIncluded
+		DEF hanim_l_ring_proximal Segment {}    # NotIncluded
+		DEF hanim_l_ring_middle Segment {}    # NotIncluded
+		DEF hanim_l_ring_distal Segment {}    # NotIncluded
+		DEF hanim_l_pinky_proximal Segment {}    # NotIncluded
+		DEF hanim_l_pinky_middle Segment {}    # NotIncluded
+		DEF hanim_l_pinky_distal Segment {}    # NotIncluded
+		DEF hanim_r_clavicle Segment {}    # NotIncluded
+		DEF hanim_r_scapula Segment {}    # NotIncluded
+		DEF hanim_r_thumb_metacarpal Segment {}    # NotIncluded
+		DEF hanim_r_thumb_proximal Segment {}    # NotIncluded
+		DEF hanim_r_thumb_distal Segment {}    # NotIncluded
+		DEF hanim_r_index_proximal Segment {}    # NotIncluded
+		DEF hanim_r_index_middle Segment {}    # NotIncluded
+		DEF hanim_r_index_distal Segment {}    # NotIncluded
+		DEF hanim_r_middle_proximal Segment {}    # NotIncluded
+		DEF hanim_r_middle_middle Segment {}    # NotIncluded
+		DEF hanim_r_middle_distal Segment {}    # NotIncluded
+		DEF hanim_r_ring_proximal Segment {}    # NotIncluded
+		DEF hanim_r_ring_middle Segment {}    # NotIncluded
+		DEF hanim_r_ring_distal Segment {}    # NotIncluded
+		DEF hanim_r_pinky_proximal Segment {}    # NotIncluded
+		DEF hanim_r_pinky_middle Segment {}    # NotIncluded
+		DEF hanim_r_pinky_distal Segment {}    # NotIncluded
+		DEF hanim_l_midproximal Segment {}    # NotIncluded
+		DEF hanim_l_middistal Segment {}    # NotIncluded
+		DEF hanim_l_forefoot Segment {}    # NotIncluded
+		DEF hanim_r_midproximal Segment {}    # NotIncluded
+		DEF hanim_r_middistal Segment {}    # NotIncluded
+		DEF hanim_r_forefoot Segment {}    # NotIncluded
+	]
+}
+
+DEF Animations Group {
+  children [
+    DEF Stand_Animation Group {
+      children [
+	DEF r_ankleRotInterp_Stand OrientationInterpolator {
+	  key [ 0, 1 ]
+	  keyValue [ 0 0 1 0, 0 0 1 0 ]
+	}
+	DEF r_kneeRotInterp_Stand OrientationInterpolator {
+	  key [ 0, 1 ]
+	  keyValue [ 0 0 1 0, 0 0 1 0 ]
+	}
+	DEF r_hipRotInterp_Stand OrientationInterpolator {
+	  key [ 0, 1 ]
+	  keyValue [ 0 0 1 0, 0 0 1 0 ]
+	}
+	DEF l_ankleRotInterp_Stand OrientationInterpolator {
+	  key [ 0, 1 ]
+	  keyValue [ 0 0 1 0, 0 0 1 0 ]
+	}
+	DEF l_kneeRotInterp_Stand OrientationInterpolator {
+	  key [ 0, 1 ]
+	  keyValue [ 0 0 1 0, 0 0 1 0 ]
+	}
+	DEF l_hipRotInterp_Stand OrientationInterpolator {
+	  key [ 0, 1 ]
+	  keyValue [ 0 0 1 0, 0 0 1 0 ]
+	}
+	DEF lower_bodyRotInterp_Stand OrientationInterpolator {
+	  key [ 0, 1 ]
+	  keyValue [ 0 0 1 0, 0 0 1 0 ]
+	}
+	DEF r_wristRotInterp_Stand OrientationInterpolator {
+	  key [ 0, 1 ]
+	  keyValue [ 0 0 1 0, 0 0 1 0 ]
+	}
+	DEF r_elbowRotInterp_Stand OrientationInterpolator {
+	  key [ 0, 1 ]
+	  keyValue [ 0 0 1 0, 0 0 1 0 ]
+	}
+	DEF r_shoulderRotInterp_Stand OrientationInterpolator {
+	  key [ 0, 1 ]
+	  keyValue [ 0 0 1 0, 0 0 1 0 ]
+	}
+	DEF l_wristRotInterp_Stand OrientationInterpolator {
+	  key [ 0, 1 ]
+	  keyValue [ 0 0 1 0, 0 0 1 0 ]
+	}
+	DEF l_elbowRotInterp_Stand OrientationInterpolator {
+	  key [ 0, 1 ]
+	  keyValue [ 0 0 1 0, 0 0 1 0 ]
+	}
+	DEF l_shoulderRotInterp_Stand OrientationInterpolator {
+	  key [ 0, 1 ]
+	  keyValue [ 0 0 1 0, 0 0 1 0 ]
+	}
+	DEF headRotInterp_Stand OrientationInterpolator {
+	  key [ 0, 1 ]
+	  keyValue [ 0 0 1 0, 0 0 1 0 ]
+	}
+	DEF neckRotInterp_Stand OrientationInterpolator {
+	  key [ 0, 1 ]
+	  keyValue [ 0 0 1 0, 0 0 1 0 ]
+	}
+	DEF upper_bodyRotInterp_Stand OrientationInterpolator {
+	  key [ 0, 1 ]
+	  keyValue [ 0 0 1 0, 0 0 1 0 ]
+	}
+	DEF whole_bodyRotInterp_Stand OrientationInterpolator {
+	  key [ 0, 1 ]
+	  keyValue [ 0 0 1 0, 0 0 1 0 ]
+	}
+	DEF whole_bodyTranInterp_Stand PositionInterpolator {
+	  key [ 0, 1 ]
+	  keyValue [ 0 0 0, 0 0 0 ]
+	}
+	DEF Stand_Time TimeSensor {
+	  cycleInterval 0.01
+	  startTime 0
+	  stopTime 0
+	  loop FALSE
+	}
+      ]
+    }
+    DEF Walk_Animation Group {
+      children [
+	DEF r_ankleRotInterp_BasicWalk OrientationInterpolator {
+	  key [ 0, 0.125, 0.2083, 0.375, 0.4583, 0.5, 0.6667, 0.75, 0.7917, 0.9167, 1 ]
+	  keyValue [ 0 0 1 0, -1 0 0 0.3533, -1 0 0 0.1072, 1 0 0 0.2612,
+	    1 0 0 0.1268, -1 0 0 0.01793, -1 0 0 0.05824,
+	    -1 0 0 0.2398, -1 0 0 0.35, -1 0 0 0.3322, 0 0 1 0 ]
+	}
+	DEF r_kneeRotInterp_BasicWalk OrientationInterpolator {
+	  key [ 0, 0.125, 0.2083, 0.2917, 0.375, 0.5, 0.6667, 0.7917, 0.9167, 1 ]
+	  keyValue [ 1 0 0 0.8573, 1 0 0 0.8926, 1 0 0 0.5351, 1 0 0 0.1756,
+	    1 0 0 0.1194, 1 0 0 0.3153, 1 0 0 0.09354,
+	    1 0 0 0.08558, 1 0 0 0.2475, 1 0 0 0.8573 ]
+	}
+	DEF r_hipRotInterp_BasicWalk OrientationInterpolator {
+	  key [ 0, 0.125, 0.2083, 0.2917, 0.375, 0.5, 0.6667, 0.7917, 0.9167, 1 ]
+	  keyValue [ -0.5831 0.03511 0.8116 0.1481, -0.995 0.02296 0.09674 0.4683,
+	    -1 0.00192 0.007964 0.4732, -0.998 -0.0158 -0.06102 0.5079,
+	    -0.9911 -0.03541 -0.1286 0.5419, -0.9131 -0.06243 -0.403 0.3361,
+	    -0.4306 -0.07962 -0.899 0.07038, 1 0 0 0.2571,
+	    0.9891 -0.02805 0.1444 0.3879, -0.5831 0.03511 0.8116 0.1481 ]
+	}
+	DEF l_ankleRotInterp_BasicWalk OrientationInterpolator {
+	  key [ 0, 0.125, 0.2083, 0.375, 0.6667, 0.9167, 1 ]
+	  keyValue [ -1 0 0 0.06714, -1 0 0 0.2152, -1 0 0 0.3184, -1 0 0 0.4717,
+	    -1 0 0 0.2912, 1 0 0 0.1222, -1 0 0 0.06714 ]
+	}
+	DEF l_kneeRotInterp_BasicWalk OrientationInterpolator {
+	  key [ 0, 0.2083, 0.375, 0.5, 0.6667, 0.7917, 0.9167, 1 ]
+	  keyValue [ 1 0 0 0.3226, 1 0 0 0.1556, 1 0 0 0.08678, 1 0 0 0.8751,
+	    1 0 0 1.131, 1 0 0 0.09961, 1 0 0 0.3942, 1 0 0 0.3226 ]
+	}
+	DEF l_hipRotInterp_BasicWalk OrientationInterpolator {
+	  key [ 0, 0.25, 0.375, 0.5, 0.6667, 0.7917, 0.9167, 1 ]
+	  keyValue [ -0.873 0.06094 0.484 0.2865, 0.9963 -0.01057 0.08481 0.2488,
+	    0.9965 0.01591 -0.08222 0.3836, -0.7018 -0.03223 -0.7117 0.1289,
+	    -1 0 0 0.5518, -0.9964 0.02231 0.0817 0.5351,
+	    -0.9809 0.04912 0.1881 0.5204, -0.873 0.06094 0.484 0.2865 ]
+	}
+	DEF lower_bodyRotInterp_BasicWalk OrientationInterpolator {
+	  key [ 0, 0.5, 1 ]
+	  keyValue [ 0 0 -1 0.1056, 0 0 1 0.09018, 0 0 -1 0.1056 ]
+	}
+	DEF r_wristRotInterp_BasicWalk OrientationInterpolator {
+	  key [ 0, 0.375, 0.9167, 1 ]
+	  keyValue [ -0.8129 0.4759 -0.3357 0.1346, 0.1533 -0.9878 0.02582 0.3902,
+	    -0.5701 0.7604 -0.311 0.366, -0.8129 0.4759 -0.3357 0.1346 ]
+	}
+	DEF r_elbowRotInterp_BasicWalk OrientationInterpolator {
+	  key [ 0, 0.375, 0.9167, 1 ]
+	  keyValue [ -1 0 0 0.411508, -1 0 0 0.0925011,
+	    -1 0 0 0.572568, -1 0 0 0.411508 ]
+	}
+	DEF r_shoulderRotInterp_BasicWalk OrientationInterpolator {
+	  key [ 0, 0.375, 0.9167, 1 ]
+	  keyValue [ -1 0 0 0.09346, 1 0 0 0.3197,
+	    -1 0 0 0.1564, -1 0 0 0.09346 ]
+	}
+	DEF l_wristRotInterp_BasicWalk OrientationInterpolator {
+	  key [ 0, 0.375, 0.9167, 1 ]
+	  keyValue [ 0 -1 0 0.461076, -0.330195 -0.927451 0.175516 0.538852,
+	    0.0327774 -0.999314 -0.0172185 0.492033, 0 -1 0 0.461076 ]
+	}
+	DEF l_elbowRotInterp_BasicWalk OrientationInterpolator {
+	  key [ 0, 0.375, 0.9167, 1 ]
+	  keyValue [ -1 0 0 0.0659878, -1 0 0 0.488383,
+	    -1 0 0 0.0177536, -1 0 0 0.0659878 ]
+	}
+	DEF l_shoulderRotInterp_BasicWalk OrientationInterpolator {
+	  key [ 0, 0.375, 0.9167, 1 ]
+	  keyValue [ 1 0 0 0.1189, -1 0 0 0.1861,
+	    1 0 0 0.3357, 1 0 0 0.1189 ]
+	}
+	DEF headRotInterp_BasicWalk OrientationInterpolator {
+	  key [ 0, 0.375, 0.4167, 0.5, 0.5833, 0.6667, 0.75, 0.8333, 0.9167, 1 ]
+	  keyValue [ 0 -1 0 0.08642, 0 1 0 0.1825, 0 1 0 0.1505,
+	    0 1 0 0.1053, 0 1 0 0.04391,
+	    0 -1 0 0.03119, 0 -1 0 0.07936,
+	    0 -1 0 0.1616, 0 -1 0 0.155, 0 -1 0 0.08642 ]
+	}
+	DEF neckRotInterp_BasicWalk OrientationInterpolator {
+	  key [ 0, 1 ]
+	  keyValue [ 0 0 1 0, 0 0 1 0 ]
+	}
+	DEF upper_bodyRotInterp_BasicWalk OrientationInterpolator {
+	  key [ 0, 0.2083, 0.375, 0.75, 0.8333, 1 ]
+	  keyValue [ 0 1 0 0.0826, -0.01972 -0.5974 0.8017 0.08231,
+	    0.009296 -0.9648 0.2627 0.1734, -0.01238 0.9549 -0.2968 0.08732,
+	    -0.008125 0.9691 -0.2463 0.158, 0 1 0 0.0826 ]
+	}
+	DEF whole_bodyRotInterp_BasicWalk OrientationInterpolator {
+	  key [ 0, 1 ]
+	  keyValue [ 0 0 1 0, 0 0 1 0 ]
+	}
+	DEF whole_bodyTranInterp_BasicWalk PositionInterpolator {
+	  key [ 0, 0.04167, 0.125, 0.1667, 0.2083, 0.25, 0.2917, 0.375, 0.4583, 0.5, 0.5417, 0.5833,
+	    0.625, 0.7083, 0.75, 0.7917, 0.875, 0.9167, 1 ]
+	   keyValue [ 0 -0.00928 0,
+	              0 -0.003858 0.04167,
+	    0 -0.008847 0.125,
+	    0 -0.01486 0.1667,
+	    0 -0.02641 0.2083, 
+	    0 -0.03934 0.25,
+	    0 -0.0502 0.2917,
+	    0 -0.07469 0.375,
+	    0 -0.02732 0.4583,
+	    0 -0.01608 0.5,
+	    0 -0.01129 0.5417,
+	    0 -0.005819 0.5833,
+	    0 -0.002004 0.625,
+	    0 -0.002579 0.7083,
+	    0 -0.0143 0.75,
+	    0 -0.03799 0.7917,
+	    0 -0.05648 0.875,
+	    0 -0.045 0.9167,
+	    0 -0.00928 1 ]
+	}
+	DEF Walk_Time TimeSensor {
+	  cycleInterval 0.2
+	  startTime -1
+	  stopTime 0
+	  loop FALSE
+	}
+      ]
+    }
+    DEF Run_Animation Group {
+      children [
+	DEF r_ankleRotInterp_Run OrientationInterpolator {
+	  key [ 0, 0.4909, 0.7091, 0.8, 0.8182, 1 ]
+	  keyValue [ 1 0 0 0.2323, -1 0 0 0.07843,
+	    -1 0 0 0.09676, -1 0 0 0.3274,
+	    -1 0 0 0.3278, 1 0 0 0.2323 ]
+	}
+	DEF r_kneeRotInterp_Run OrientationInterpolator {
+	  key [ 0, 0.03636, 0.2182, 0.4909, 0.7455, 1 ]
+	  keyValue [ 1 0 0 0.7004, 1 0 0 1.011,
+	    1 0 0 1.892, 1 0 0 1.188,
+	    1 0 0 0.3964, 1 0 0 0.7004 ]
+	}
+	DEF r_hipRotInterp_Run OrientationInterpolator {
+	  key [ 0, 0.2182, 0.4909, 0.7455, 1 ]
+	  keyValue [ 0.9999 0.00293 -0.00989 0.402, -1 0.004977 -0.00497 0.5943,
+	    -1 0.003265 -0.001752 1.178, -0.9999 0.00815 -0.01093 0.3031,
+	    0.9999 0.00293 -0.00989 0.402 ]
+	}
+	DEF l_ankleRotInterp_Run OrientationInterpolator {
+	  key [ 0, 0.2182, 0.3091, 0.4909, 1 ]
+	  keyValue [ 1 0 0 0.03543, -1 0 0 0.1037,
+	    -1 0 0 0.4328, 1 0 0 0.1929,
+	    1 0 0 0.03543 ]
+	}
+	DEF l_kneeRotInterp_Run OrientationInterpolator {
+	  key [ 0, 0.2182, 0.4909, 0.7455, 1 ]
+	  keyValue [ 1 0 0 1.108, 1 0 0 0.4265,
+	    1 0 0 0.7052, 1 0 0 2.179,
+	    1 0 0 1.108 ]
+	}
+	DEF l_hipRotInterp_Run OrientationInterpolator {
+	  key [ 0, 0.2182, 0.4909, 0.7455, 1 ]
+	  keyValue [ -0.9986 0.03354 0.04001 1.212, -0.9889 0.1328 0.06696 0.4025,
+	    0.9894 0.1453 0.009351 0.4114, -0.9963 0.07032 0.05003 0.7035,
+	    -0.9986 0.03354 0.04001 1.212 ]
+	}
+	DEF lower_bodyRotInterp_Run OrientationInterpolator {
+	  key [ 0, 1 ]
+	  keyValue [ 0.9969 -0.05444 0.05596 0.07687, 0.9969 -0.05444 0.05596 0.07687 ]
+	}
+	DEF r_wristRotInterp_Run OrientationInterpolator {
+	  key [ 0, 1 ]
+	  keyValue [ -0.917742 -0.237244 -0.318536 0.214273, -0.917742 -0.237244 -0.318536 0.214273 ]
+	}
+	DEF r_elbowRotInterp_Run OrientationInterpolator {
+	  key [ 0, 0.2182, 0.4909, 0.7455, 1 ]
+	  keyValue [ 0.9353 -0.2978 -0.191 4.222, -0.9362 0.2924 -0.1952 1.05,
+	    0.9941 -0.09719 -0.04725 4.512, -0.9594 0.2653 0.09579 1.525,
+	    0.9353 -0.2978 -0.191 4.222 ]
+	}
+	DEF r_shoulderRotInterp_Run OrientationInterpolator {
+	  key [ 0, 0.2182, 0.4909, 0.7455, 1 ]
+	  keyValue [ -1 0 0 0.6979, 0.9094 0.2062 -0.3613 0.4157,
+	    0.9637 0.1537 -0.2185 1.353, 0.4864 0.08841 -0.8693 0.1716,
+	    -1 0 0 0.6979 ]
+	}
+	DEF l_wristRotInterp_Run OrientationInterpolator {
+	  key [ 0, 1 ]
+	  keyValue [ -0.0240995 -0.999682 0.00741506 0.120409, -0.0240995 -0.999682 0.00741506 0.120409 ]
+	}
+	DEF l_elbowRotInterp_Run OrientationInterpolator {
+	  key [ 0, 0.2182, 0.4909, 0.7455, 1 ]
+	  keyValue [ 0.9985 0.03887 0.03802 4.689, -0.965 -0.1889 -0.1821 1.415,
+	    0.9758 0.1563 0.1529 4.666, -0.9956 -0.0936 0.009826 1.126,
+	    0.9985 0.03887 0.03802 4.689 ]
+	}
+	DEF l_shoulderRotInterp_Run OrientationInterpolator {
+	  key [ 0, 0.2182, 0.4909, 0.7455, 1 ]
+	  keyValue [ 0.9907 -0.07264 0.115 1.135, 0.9291 -0.1222 0.349 0.1695,
+	    -0.9892 0.1364 -0.05394 0.5112, 0.9942 -0.0002052 0.1073 0.4975,
+	    0.9907 -0.07264 0.115 1.135 ]
+	}
+	DEF headRotInterp_Run OrientationInterpolator {
+	  key [ 0, 0.4909, 1 ]
+	  keyValue [ 0.6517 -0.7559 0.06211 0.2508, 0.6467 0.7527 -0.1238 0.2344,
+	    0.6517 -0.7559 0.06211 0.2508 ]
+	}
+	DEF neckRotInterp_Run OrientationInterpolator {
+	  key [ 0, 1 ]
+	  keyValue [ 0 0 1 0, 0 0 1 0 ]
+	}
+	DEF upper_bodyRotInterp_Run OrientationInterpolator {
+	  key [ 0, 0.2545, 0.4909, 0.7636,
+	    1 ]
+	  keyValue [ 0.7651 0.6382 0.08586 0.2712, 0.9999 0.002845 -0.01547 0.3756,
+	    0.7459 -0.6505 -0.1432 0.2416, 0.9984 0.05536 -0.01154 0.3488,
+	    0.7651 0.6382 0.08586 0.2712 ]
+	}
+	DEF whole_bodyRotInterp_Run OrientationInterpolator {
+	  key [ 0, 1 ]
+	  keyValue [ 0 0 1 0, 0 0 1 0 ]
+	}
+	DEF whole_bodyTranInterp_Run PositionInterpolator {
+	  key [ 0, 0.2182, 0.2909, 0.3091, 0.7091, 0.8, 0.8182, 1 ]
+	  keyValue [ 0 -0.0351 0 0 -0.0351 0
+	    0 -0.04087 0 0 -0.04886 0
+	    0 -0.04051 0 0 -0.03666 0
+	    0 -0.03666 0 0 -0.0351 0 ]
+	}
+	DEF Run_Time TimeSensor {
+	  cycleInterval 1
+	  startTime -1
+	  stopTime 0
+	  loop TRUE
+	}
+      ]
+    }
+    DEF Jump_Animation Group {
+      children [
+	DEF r_ankleRotInterp_Jump OrientationInterpolator {
+	  key [ 0, 0.28, 0.32, 0.36, 0.4, 0.44, 0.48, 0.64, 0.76, 0.84, 0.88, 0.92, 0.96, 1 ]
+	  keyValue [ 0 0 1 0, -1 0 0 0.6735, -1 0 0 0.6735,
+	    -1 0 0 0.3527, -1 0 0 0.3038,
+	    -1 0 0 0.07964, 1 0 0 0.3001,
+	    1 0 0 0.6509, 1 0 0 0.3001,
+	    -1 0 0 0.2087, -1 0 0 0.3756,
+	    -1 0 0 0.3279, -1 0 0 0.1193, 0 0 1 0 ]
+	}
+	DEF r_kneeRotInterp_Jump OrientationInterpolator {
+	  key [ 0, 0.28, 0.32, 0.48, 0.64, 0.76, 0.88, 1 ]
+	  keyValue [ 0 0 1 0, 1 0 0 2.005, 1 0 0 2.005,
+	    0 0 1 0, 1 0 0 0.9507, 1 0 0 0.5845,
+	    1 0 0 0.9054, 0 0 1 0 ]
+	}
+	DEF r_hipRotInterp_Jump OrientationInterpolator {
+	  key [ 0, 0.28, 0.32, 0.36, 0.4, 0.44, 0.48, 0.64, 0.76, 0.88, 1 ]
+	  keyValue [ 0 0 1 0, 1 0 0 4.433, 1 0 0 4.433,
+	    1 0 0 4.647, -1 0 0 0.8943,
+	    -1 0 0 0.3698, 0 0 1 0, -1 0 0 0.4963,
+	    -1 0 0 0.3829, -1 0 0 0.5169, 0 0 1 0 ]
+	}
+	DEF l_ankleRotInterp_Jump OrientationInterpolator {
+	  key [ 0, 0.28, 0.32, 0.36, 0.4, 0.44, 0.48, 0.64, 0.76, 0.84, 0.88, 0.92, 0.96, 1 ]
+	  keyValue [ 0 0 1 0, -1 0 0 0.625, -1 0 0 0.625,
+	    -1 0 0 0.3364, -1 0 0 0.2742,
+	    -1 0 0 0.05078, 1 0 0 0.2833,
+	    1 0 0 0.6667, 1 0 0 0.2833,
+	    -1 0 0 0.2108, -1 0 0 0.375,
+	    -1 0 0 0.3146, -1 0 0 0.1174, 0 0 1 0 ]
+	}
+	DEF l_kneeRotInterp_Jump OrientationInterpolator {
+	  key [ 0, 0.28, 0.32, 0.48, 0.64, 0.76, 0.88, 1 ]
+	  keyValue [ 0 0 1 0, 1 0 0 2.047, 1 0 0 2.047,
+	    0 0 1 0, 1 0 0 1.566, 1 0 0 0.5913,
+	    1 0 0 0.9235, 0 0 1 0 ]
+	}
+	DEF l_hipRotInterp_Jump OrientationInterpolator {
+	  key [ 0, 0.28, 0.32, 0.36, 0.4, 0.44, 0.48, 0.64, 0.76, 0.88, 1 ]
+	  keyValue [ 0 0 1 0, 1 0 0 4.349, 1 0 0 4.349,
+	    1 0 0 4.615, -1 0 0 0.9136,
+	    -1 0 0 0.3614, 0 0 1 0, -1 0 0 0.7869,
+	    -1 0 0 0.3918, -1 0 0 0.5433, 0 0 1 0 ]
+	}
+	DEF lower_bodyRotInterp_Jump OrientationInterpolator {
+	  key [ 0, 0.28, 0.32, 0.48, 0.76, 1 ]
+	  keyValue [ 0 0 1 0, 1 0 0 0.1892, 1 0 0 0.1892,
+	    0 0 1 0, 0 0 1 0, 0 0 1 0 ]
+	}
+	DEF r_wristRotInterp_Jump OrientationInterpolator {
+	  key [ 0, 0.28, 0.32, 0.64, 0.76, 1 ]
+	  keyValue [ 0 0 1 0, -0.0585279 0.983903 -0.168849 1.85956,
+	    -0.0585279 0.983903 -0.168849 1.85956,
+	    -0.00222418 0.99801 -0.0630095 1.46072,
+	    0 1 0 0.497349,
+	    0 0 1 0 ]
+	}
+	DEF r_elbowRotInterp_Jump OrientationInterpolator {
+	  key [ 0, 0.28, 0.32, 0.64, 0.76, 1 ]
+	  keyValue [ 0 0 1 0, -1 0 0 0.04151,
+	    -1 0 0 0.04151, -1 0 0 0.5855,
+	    -1 0 0 0.5852, 0 0 1 0 ]
+	}
+	DEF r_shoulderRotInterp_Jump OrientationInterpolator {
+	  key [ 0, 0.28, 0.32, 0.64, 0.76, 0.88, 1 ]
+	  keyValue [ 0 0 1 0, 0.9992 0.02042 0.03558 4.688,
+	    0.9992 0.02042 0.03558 4.688, 0.9989 -0.04623 0.005159 4.079,
+	    -0.8687 -0.2525 -0.4261 1.501, -0.941 -0.2893 -0.1754 0.4788, 0 0 1 0 ]
+	}
+	DEF l_wristRotInterp_Jump OrientationInterpolator {
+	  key [ 0, 0.28, 0.32, 0.64, 0.76, 0.88, 1 ]
+	  keyValue [ 0 0 1 0, 0.0672928 0.989475 -0.128107 4.15574,
+	    0.0672928 0.989475 -0.128107 4.15574,
+	    0.00364942 0.999901 0.0135896 4.5822,
+	    0 -1 0 0.655922,
+	    -0.00050618 -0.999999 0.0012782 1.28397, 0 0 1 0 ]
+	}
+	DEF l_elbowRotInterp_Jump OrientationInterpolator {
+	  key [ 0, 0.28, 0.32, 0.64, 0.76, 1 ]
+	  keyValue [ 0 0 1 0, -1 0 0 0.1229,
+	    -1 0 0 0.1229, -1 0 0 0.5976,
+	    -1 0 0 0.3917, 0 0 1 0 ]
+	}
+	DEF l_shoulderRotInterp_Jump OrientationInterpolator {
+	  key [ 0, 0.28, 0.32, 0.64, 0.76, 0.88, 1 ]
+	  keyValue [ 0 0 1 0, -0.9987 0.02554 0.04498 1.57,
+	    -0.9987 0.02554 0.04498 1.57, 1 0.0004113 0.003055 4.114,
+	    -0.8413 0.3238 0.4329 1.453, -0.877 0.4198 0.2337 0.6009, 0 0 1 0 ]
+	}
+	DEF headRotInterp_Jump OrientationInterpolator {
+	  key [ 0, 0.28, 0.32, 0.48, 0.76, 1 ]
+	  keyValue [ 0 0 1 0, -1 0 0 0.5989, -1 0 0 0.5989,
+	    -1 0 0 0.3216, 1 0 0 0.06503, 0 0 1 0 ]
+	}
+	DEF neckRotInterp_Jump OrientationInterpolator {
+	  key [ 0, 0.28, 0.32, 0.48, 0.76, 1 ]
+	  keyValue [ 0 0 1 0, -1 0 0 0.1942, -1 0 0 0.1942,
+	    0 0 1 0, 1 0 0 0.2284, 0 0 1 0 ]
+	}
+	DEF upper_bodyRotInterp_Jump OrientationInterpolator {
+	  key [ 0, 0.28, 0.32, 0.48, 0.76, 0.88, 1 ]
+	  keyValue [ 0 0 1 0, 1 0 0 1.038, 1 0 0 1.038,
+	    -1 0 0 0.1057, 1 0 0 0.2171,
+	    1 0 0 0.3465, 0 0 1 0 ]
+	}
+	DEF whole_bodyRotInterp_Jump OrientationInterpolator {
+	  key [ 0, 0.28, 0.32, 0.48, 0.64, 0.76, 1 ]
+	  keyValue [ 0 0 1 0, 1 0 0 0.3273, 1 0 0 0.3273,
+	    0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0 ]
+	}
+	DEF whole_bodyTranInterp_Jump PositionInterpolator {
+	  key [ 0, 0.04, 0.08, 0.12, 0.16, 0.2, 0.24, 0.28, 0.32, 0.36, 0.4, 0.44,
+	    0.48, 0.64, 0.76, 0.8, 0.84, 0.88, 0.92, 0.96, 1 ]
+	  keyValue [ 0 0 0, 0 -0.01264 -0.01289, 0 -0.04712 -0.03738,
+	    -0.0003345 -0.1049 -0.05353, -0.0005712 -0.1892 -0.06561,
+	    -0.0008233 -0.286 -0.06276, -0.0009591 -0.3795 -0.05148,
+	    -0.00106 -0.4484 -0.03656, -0.00106 -0.4484 -0.03656,
+	    -0.001122 -0.3269 -0.1499, -0.0008616 -0.13 -0.06358,
+	    -0.0005128 -0.03123 -0.05488, 0.0004779 0.053 0.02732,
+	    0.0001728 0.4148 0.006873, 0 0.03045 0.02148,
+	    0 -0.01299 -0.01057, 0 -0.06932 -0.01064,
+	    0.0001365 -0.1037 -0.005059, 0.0001279 -0.07198 -0.007596,
+	    0.000141 -0.01626 -0.004935, 0 0 0 ]
+	}
+	DEF Jump_Time TimeSensor {
+	  cycleInterval 2
+	  startTime -1
+	  stopTime 0
+	  loop FALSE
+	}
+      ]
+    }
+  ]
+}
+
+ROUTE Stand_Time.fraction_changed TO r_ankleRotInterp_Stand.set_fraction
+ROUTE Stand_Time.fraction_changed TO r_kneeRotInterp_Stand.set_fraction
+ROUTE Stand_Time.fraction_changed TO r_hipRotInterp_Stand.set_fraction
+ROUTE Stand_Time.fraction_changed TO l_ankleRotInterp_Stand.set_fraction
+ROUTE Stand_Time.fraction_changed TO l_kneeRotInterp_Stand.set_fraction
+ROUTE Stand_Time.fraction_changed TO l_hipRotInterp_Stand.set_fraction
+ROUTE Stand_Time.fraction_changed TO lower_bodyRotInterp_Stand.set_fraction
+ROUTE Stand_Time.fraction_changed TO r_wristRotInterp_Stand.set_fraction
+ROUTE Stand_Time.fraction_changed TO r_elbowRotInterp_Stand.set_fraction
+ROUTE Stand_Time.fraction_changed TO r_shoulderRotInterp_Stand.set_fraction
+ROUTE Stand_Time.fraction_changed TO l_wristRotInterp_Stand.set_fraction
+ROUTE Stand_Time.fraction_changed TO l_elbowRotInterp_Stand.set_fraction
+ROUTE Stand_Time.fraction_changed TO l_shoulderRotInterp_Stand.set_fraction
+ROUTE Stand_Time.fraction_changed TO headRotInterp_Stand.set_fraction
+ROUTE Stand_Time.fraction_changed TO neckRotInterp_Stand.set_fraction
+ROUTE Stand_Time.fraction_changed TO upper_bodyRotInterp_Stand.set_fraction
+ROUTE Stand_Time.fraction_changed TO whole_bodyRotInterp_Stand.set_fraction
+ROUTE Stand_Time.fraction_changed TO whole_bodyTranInterp_Stand.set_fraction
+
+ROUTE r_ankleRotInterp_Stand.value_changed TO hanim_r_ankle.set_rotation
+ROUTE r_kneeRotInterp_Stand.value_changed TO hanim_r_knee.set_rotation
+ROUTE r_hipRotInterp_Stand.value_changed TO hanim_r_hip.set_rotation
+ROUTE l_ankleRotInterp_Stand.value_changed TO hanim_l_ankle.set_rotation
+ROUTE l_kneeRotInterp_Stand.value_changed TO hanim_l_knee.set_rotation
+ROUTE l_hipRotInterp_Stand.value_changed TO hanim_l_hip.set_rotation
+ROUTE lower_bodyRotInterp_Stand.value_changed TO hanim_sacroiliac.set_rotation
+ROUTE r_wristRotInterp_Stand.value_changed TO hanim_r_wrist.set_rotation
+ROUTE r_elbowRotInterp_Stand.value_changed TO hanim_r_elbow.set_rotation
+ROUTE r_shoulderRotInterp_Stand.value_changed TO hanim_r_shoulder.set_rotation
+ROUTE l_wristRotInterp_Stand.value_changed TO hanim_l_wrist.set_rotation
+ROUTE l_elbowRotInterp_Stand.value_changed TO hanim_l_elbow.set_rotation
+ROUTE l_shoulderRotInterp_Stand.value_changed TO hanim_l_shoulder.set_rotation
+ROUTE headRotInterp_Stand.value_changed TO hanim_skullbase.set_rotation
+ROUTE neckRotInterp_Stand.value_changed TO hanim_vc4.set_rotation
+ROUTE upper_bodyRotInterp_Stand.value_changed TO hanim_vl1.set_rotation
+ROUTE whole_bodyRotInterp_Stand.value_changed TO hanim_HumanoidRoot.set_rotation
+ROUTE whole_bodyTranInterp_Stand.value_changed TO hanim_HumanoidRoot.set_translation
+
+ROUTE Walk_Time.fraction_changed TO r_ankleRotInterp_BasicWalk.set_fraction
+ROUTE Walk_Time.fraction_changed TO r_kneeRotInterp_BasicWalk.set_fraction
+ROUTE Walk_Time.fraction_changed TO r_hipRotInterp_BasicWalk.set_fraction
+ROUTE Walk_Time.fraction_changed TO l_ankleRotInterp_BasicWalk.set_fraction
+ROUTE Walk_Time.fraction_changed TO l_kneeRotInterp_BasicWalk.set_fraction
+ROUTE Walk_Time.fraction_changed TO l_hipRotInterp_BasicWalk.set_fraction
+ROUTE Walk_Time.fraction_changed TO lower_bodyRotInterp_BasicWalk.set_fraction
+ROUTE Walk_Time.fraction_changed TO r_wristRotInterp_BasicWalk.set_fraction
+ROUTE Walk_Time.fraction_changed TO r_elbowRotInterp_BasicWalk.set_fraction
+ROUTE Walk_Time.fraction_changed TO r_shoulderRotInterp_BasicWalk.set_fraction
+ROUTE Walk_Time.fraction_changed TO l_wristRotInterp_BasicWalk.set_fraction
+ROUTE Walk_Time.fraction_changed TO l_elbowRotInterp_BasicWalk.set_fraction
+ROUTE Walk_Time.fraction_changed TO l_shoulderRotInterp_BasicWalk.set_fraction
+ROUTE Walk_Time.fraction_changed TO headRotInterp_BasicWalk.set_fraction
+ROUTE Walk_Time.fraction_changed TO neckRotInterp_BasicWalk.set_fraction
+ROUTE Walk_Time.fraction_changed TO upper_bodyRotInterp_BasicWalk.set_fraction
+ROUTE Walk_Time.fraction_changed TO whole_bodyRotInterp_BasicWalk.set_fraction
+ROUTE Walk_Time.fraction_changed TO whole_bodyTranInterp_BasicWalk.set_fraction
+
+ROUTE r_ankleRotInterp_BasicWalk.value_changed TO hanim_r_ankle.set_rotation
+ROUTE r_kneeRotInterp_BasicWalk.value_changed TO hanim_r_knee.set_rotation
+ROUTE r_hipRotInterp_BasicWalk.value_changed TO hanim_r_hip.set_rotation
+ROUTE l_ankleRotInterp_BasicWalk.value_changed TO hanim_l_ankle.set_rotation
+ROUTE l_kneeRotInterp_BasicWalk.value_changed TO hanim_l_knee.set_rotation
+ROUTE l_hipRotInterp_BasicWalk.value_changed TO hanim_l_hip.set_rotation
+ROUTE lower_bodyRotInterp_BasicWalk.value_changed TO hanim_sacroiliac.set_rotation
+ROUTE r_wristRotInterp_BasicWalk.value_changed TO hanim_r_wrist.set_rotation
+ROUTE r_elbowRotInterp_BasicWalk.value_changed TO hanim_r_elbow.set_rotation
+ROUTE r_shoulderRotInterp_BasicWalk.value_changed TO hanim_r_shoulder.set_rotation
+ROUTE l_wristRotInterp_BasicWalk.value_changed TO hanim_l_wrist.set_rotation
+ROUTE l_elbowRotInterp_BasicWalk.value_changed TO hanim_l_elbow.set_rotation
+ROUTE l_shoulderRotInterp_BasicWalk.value_changed TO hanim_l_shoulder.set_rotation
+ROUTE headRotInterp_BasicWalk.value_changed TO hanim_skullbase.set_rotation
+ROUTE neckRotInterp_BasicWalk.value_changed TO hanim_vc4.set_rotation
+ROUTE upper_bodyRotInterp_BasicWalk.value_changed TO hanim_vl1.set_rotation
+ROUTE whole_bodyRotInterp_BasicWalk.value_changed TO hanim_HumanoidRoot.set_rotation
+ROUTE whole_bodyTranInterp_BasicWalk.value_changed TO hanim_HumanoidRoot.set_translation
+
+ROUTE Run_Time.fraction_changed TO r_ankleRotInterp_Run.set_fraction
+ROUTE Run_Time.fraction_changed TO r_kneeRotInterp_Run.set_fraction
+ROUTE Run_Time.fraction_changed TO r_hipRotInterp_Run.set_fraction
+ROUTE Run_Time.fraction_changed TO l_ankleRotInterp_Run.set_fraction
+ROUTE Run_Time.fraction_changed TO l_kneeRotInterp_Run.set_fraction
+ROUTE Run_Time.fraction_changed TO l_hipRotInterp_Run.set_fraction
+ROUTE Run_Time.fraction_changed TO lower_bodyRotInterp_Run.set_fraction
+ROUTE Run_Time.fraction_changed TO r_wristRotInterp_Run.set_fraction
+ROUTE Run_Time.fraction_changed TO r_elbowRotInterp_Run.set_fraction
+ROUTE Run_Time.fraction_changed TO r_shoulderRotInterp_Run.set_fraction
+ROUTE Run_Time.fraction_changed TO l_wristRotInterp_Run.set_fraction
+ROUTE Run_Time.fraction_changed TO l_elbowRotInterp_Run.set_fraction
+ROUTE Run_Time.fraction_changed TO l_shoulderRotInterp_Run.set_fraction
+ROUTE Run_Time.fraction_changed TO headRotInterp_Run.set_fraction
+ROUTE Run_Time.fraction_changed TO neckRotInterp_Run.set_fraction
+ROUTE Run_Time.fraction_changed TO upper_bodyRotInterp_Run.set_fraction
+ROUTE Run_Time.fraction_changed TO whole_bodyRotInterp_Run.set_fraction
+ROUTE Run_Time.fraction_changed TO whole_bodyTranInterp_Run.set_fraction
+
+ROUTE r_ankleRotInterp_Run.value_changed TO hanim_r_ankle.set_rotation
+ROUTE r_kneeRotInterp_Run.value_changed TO hanim_r_knee.set_rotation
+ROUTE r_hipRotInterp_Run.value_changed TO hanim_r_hip.set_rotation
+ROUTE l_ankleRotInterp_Run.value_changed TO hanim_l_ankle.set_rotation
+ROUTE l_kneeRotInterp_Run.value_changed TO hanim_l_knee.set_rotation
+ROUTE l_hipRotInterp_Run.value_changed TO hanim_l_hip.set_rotation
+ROUTE lower_bodyRotInterp_Run.value_changed TO hanim_sacroiliac.set_rotation
+ROUTE r_wristRotInterp_Run.value_changed TO hanim_r_wrist.set_rotation
+ROUTE r_elbowRotInterp_Run.value_changed TO hanim_r_elbow.set_rotation
+ROUTE r_shoulderRotInterp_Run.value_changed TO hanim_r_shoulder.set_rotation
+ROUTE l_wristRotInterp_Run.value_changed TO hanim_l_wrist.set_rotation
+ROUTE l_elbowRotInterp_Run.value_changed TO hanim_l_elbow.set_rotation
+ROUTE l_shoulderRotInterp_Run.value_changed TO hanim_l_shoulder.set_rotation
+ROUTE headRotInterp_Run.value_changed TO hanim_skullbase.set_rotation
+ROUTE neckRotInterp_Run.value_changed TO hanim_vc4.set_rotation
+ROUTE upper_bodyRotInterp_Run.value_changed TO hanim_vl1.set_rotation
+ROUTE whole_bodyRotInterp_Run.value_changed TO hanim_HumanoidRoot.set_rotation
+ROUTE whole_bodyTranInterp_Run.value_changed TO hanim_HumanoidRoot.set_translation
+
+ROUTE Jump_Time.fraction_changed TO r_ankleRotInterp_Jump.set_fraction
+ROUTE Jump_Time.fraction_changed TO r_kneeRotInterp_Jump.set_fraction
+ROUTE Jump_Time.fraction_changed TO r_hipRotInterp_Jump.set_fraction
+ROUTE Jump_Time.fraction_changed TO l_ankleRotInterp_Jump.set_fraction
+ROUTE Jump_Time.fraction_changed TO l_kneeRotInterp_Jump.set_fraction
+ROUTE Jump_Time.fraction_changed TO l_hipRotInterp_Jump.set_fraction
+ROUTE Jump_Time.fraction_changed TO lower_bodyRotInterp_Jump.set_fraction
+ROUTE Jump_Time.fraction_changed TO r_wristRotInterp_Jump.set_fraction
+ROUTE Jump_Time.fraction_changed TO r_elbowRotInterp_Jump.set_fraction
+ROUTE Jump_Time.fraction_changed TO r_shoulderRotInterp_Jump.set_fraction
+ROUTE Jump_Time.fraction_changed TO l_wristRotInterp_Jump.set_fraction
+ROUTE Jump_Time.fraction_changed TO l_elbowRotInterp_Jump.set_fraction
+ROUTE Jump_Time.fraction_changed TO l_shoulderRotInterp_Jump.set_fraction
+ROUTE Jump_Time.fraction_changed TO headRotInterp_Jump.set_fraction
+ROUTE Jump_Time.fraction_changed TO neckRotInterp_Jump.set_fraction
+ROUTE Jump_Time.fraction_changed TO upper_bodyRotInterp_Jump.set_fraction
+ROUTE Jump_Time.fraction_changed TO whole_bodyRotInterp_Jump.set_fraction
+ROUTE Jump_Time.fraction_changed TO whole_bodyTranInterp_Jump.set_fraction
+
+ROUTE r_ankleRotInterp_Jump.value_changed TO hanim_r_ankle.set_rotation
+ROUTE r_kneeRotInterp_Jump.value_changed TO hanim_r_knee.set_rotation
+ROUTE r_hipRotInterp_Jump.value_changed TO hanim_r_hip.set_rotation
+ROUTE l_ankleRotInterp_Jump.value_changed TO hanim_l_ankle.set_rotation
+ROUTE l_kneeRotInterp_Jump.value_changed TO hanim_l_knee.set_rotation
+ROUTE l_hipRotInterp_Jump.value_changed TO hanim_l_hip.set_rotation
+ROUTE lower_bodyRotInterp_Jump.value_changed TO hanim_sacroiliac.set_rotation
+ROUTE r_wristRotInterp_Jump.value_changed TO hanim_r_wrist.set_rotation
+ROUTE r_elbowRotInterp_Jump.value_changed TO hanim_r_elbow.set_rotation
+ROUTE r_shoulderRotInterp_Jump.value_changed TO hanim_r_shoulder.set_rotation
+ROUTE l_wristRotInterp_Jump.value_changed TO hanim_l_wrist.set_rotation
+ROUTE l_elbowRotInterp_Jump.value_changed TO hanim_l_elbow.set_rotation
+ROUTE l_shoulderRotInterp_Jump.value_changed TO hanim_l_shoulder.set_rotation
+ROUTE headRotInterp_Jump.value_changed TO hanim_skullbase.set_rotation
+ROUTE neckRotInterp_Jump.value_changed TO hanim_vc4.set_rotation
+ROUTE upper_bodyRotInterp_Jump.value_changed TO hanim_vl1.set_rotation
+ROUTE whole_bodyRotInterp_Jump.value_changed TO hanim_HumanoidRoot.set_rotation
+ROUTE whole_bodyTranInterp_Jump.value_changed TO hanim_HumanoidRoot.set_translation
+
+Transform {
+   translation 3 0 0
+   children [
+      DEF capteur TouchSensor {}
+      Shape {                        
+	 appearance Appearance {
+	    material Material {}
+	 }
+	 geometry Box {
+	 }
+      }
+   ]
+}
+
+DEF yt_script Script {
+   # Nodes
+   field SFNode Walk_Time USE Walk_Time
+   field SFNode Stand_Time USE Stand_Time
+   
+   # Humanoid root
+   field SFNode hanim_HumanoidRoot USE hanim_HumanoidRoot
+   
+   # Walk animations
+   field SFNode walkBodyTran USE whole_bodyTranInterp_BasicWalk
+   field SFNode walkBodyRot  USE whole_bodyRotInterp_BasicWalk
+   
+   # Stand animations
+   field SFNode standBodyRot USE whole_bodyRotInterp_Stand
+   field SFNode standBodyTran USE whole_bodyTranInterp_Stand
+   
+   # State
+   field SFInt32 cyclesNb 0
+   field SFFloat cyclesFraction 0.0
+   field SFFloat destX 0.
+   field SFFloat destZ 0.
+   
+   # Events
+   eventIn SFTime testWalk
+   eventIn SFFloat startWalk
+   eventIn SFBool continueWalk
+   eventIn SFFloat stopWalk
+   url ["yt.js"]
+}
+
+ROUTE capteur.touchTime TO yt_script.testWalk
+ROUTE Walk_Time.isActive TO yt_script.continueWalk
+
+

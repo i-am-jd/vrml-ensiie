@@ -1,0 +1,147 @@
+#VRML V2.0 utf8
+
+#Projet DePoEcK
+
+Group {
+    children [
+	
+		Background {
+			leftUrl "models/textures/sky0004.jpg"
+			frontUrl "models/textures/sky0005.jpg"
+			rightUrl "models/textures/sky0001.jpg"
+			backUrl "models/textures/sky0002.jpg"
+			topUrl "models/textures/sky0003.jpg"
+			bottomUrl "models/textures/sky0006.jpg"
+		}
+
+        PointLight {
+			
+            location 0 20 0
+        }
+
+		#Permet de se dplacer sur le terrain
+		#en respectant la nivellation
+		#Mode NOCLIP off
+        NavigationInfo {
+            headlight FALSE
+            avatarSize [ 0.25,1.5,0.25 ]
+        }
+                
+        Viewpoint {
+            position -4 1.1 9
+            orientation 0 1 0 -1.57					#rotation selon y de -pi/2
+            description "depart"
+        }
+
+		
+		#forme pour reprer le point 0 0 0 dans le monde
+		#la pointe est oriente vers Y (GRIS)
+        Transform {                                #position de la forme
+            translation  0.0 -3.0 0.0
+            children [
+                Shape {                        
+                    appearance Appearance {
+                        material Material {}
+                    }
+                    geometry Cone {               #forme conique 1*2 metres par defaut
+                    }
+                }
+            ]
+        },
+		
+		#la pointe est oriente vers X (JAUNE)
+		Transform {                                #position de la forme
+            translation  5.0 -2.0 0.0
+			rotation 0.0 0.0 1.0 -1.57
+            children [
+                Shape {                        
+                    appearance Appearance {
+                        material Material {
+						diffuseColor 1 1 0
+						}
+                    }
+                    geometry Cone {               #forme conique 1*2 metres par defaut
+                    }
+                }
+            ]
+        },
+	]
+}
+
+#DEF yt Transform {
+#   translation 2 0 0
+#   rotation 0 1 0 0
+#   children [
+#      Inline {
+#	 url ["yt/yt.wrl"]
+#      }
+#   ]
+#}
+
+Transform {
+	rotation 0 1 0 -1.57
+	scale 6 6 6
+	children [ Inline { url "models/terrain.wrl" } ]
+}
+
+Transform {
+   translation 0 0 0
+   rotation 0 1 0 0
+   scale 3 3 3
+   scaleOrientation 0 1 0 0
+   children [
+	DEF maison Inline { url ["models/maison.wrl"] },
+	DEF porte  Inline { url ["models/porte.wrl"] },
+	DEF win1   Inline { url ["models/win1.wrl"] },
+	DEF win2   Inline { url ["models/win2.wrl"] },
+	DEF win3   Inline { url ["models/win3.wrl"] },
+	DEF win4   Inline { url ["models/win4.wrl"] },
+	DEF win5   Inline { url ["models/win5.wrl"] },
+	DEF win6   Inline { url ["models/win6.wrl"] },
+	DEF win7   Inline { url ["models/win7.wrl"] },
+	DEF win8   Inline { url ["models/win8.wrl"] },
+	DEF win9   Inline { url ["models/win9.wrl"] },
+   ]
+}
+
+Transform {
+   translation -20 0 0	
+   rotation 0 1 0 0
+   scale 3 3 3
+   scaleOrientation 0 1 0 0
+   children [
+	USE maison,
+	USE porte,
+	USE win1, USE win2, USE win3, USE win4, USE win5, USE win6, USE win7, USE win8, USE win9
+   ]
+}
+
+Transform {
+   translation 0 0 21	
+   rotation 0 1 0 3.14
+   scale 3 3 3
+   scaleOrientation 0 1 0 0
+   children [
+	USE maison,
+	USE porte,
+	USE win1, USE win2, USE win3, USE win4, USE win5, USE win6, USE win7, USE win8, USE win9
+   ]
+}
+
+Transform {
+   translation -20 0 21	
+   rotation 0 1 0 3.14
+   scale 3 3 3
+   scaleOrientation 0 1 0 0
+   children [
+	USE maison,
+	USE porte,
+	USE win1, USE win2, USE win3, USE win4, USE win5, USE win6, USE win7, USE win8, USE win9
+   ]
+}
+
+
+Transform {
+	children [ Inline { url "yt/yt.wrl" } ]
+}
+

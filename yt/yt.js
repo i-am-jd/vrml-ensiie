@@ -17,8 +17,8 @@ function door4(time) { walkToCoords([-20, 16], time); }
 //Actions triggered when destination reached
 pendingActions = [];
 
-function testWalk(time) {
-	defaultActions = [];
+function defaultActions() {
+	var defaultActions = [];
 	defaultActions[0] = door1;
 	defaultActions[1] = function(time) {
 		var i = Math.floor(Math.random() * 2);
@@ -28,8 +28,11 @@ function testWalk(time) {
 			return [door2, house2, door2, door1, house1];
 		}
 	}
+	return defaultActions;
+}
 
-	pendingActions = pendingActions.concat(defaultActions);
+function testWalk(time) {
+	pendingActions = pendingActions.concat(defaultActions());
 	callPendingAction(time);
 }
 
@@ -46,6 +49,8 @@ function cycleActions(actions) {
 
 function callPendingAction(time) {
 	if(pendingActions.length == 0) {
+		pendingActions = pendingActions.concat(defaultActions());
+		callPendingAction(time);
 		return;
 	}
 

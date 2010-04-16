@@ -92,15 +92,15 @@ Transform {
    children [
 	DEF maison Inline { url ["models/maison.wrl"] },
 	Inline { url ["models/porte.wrl"] },
-	DEF win1   Inline { url ["models/win1.wrl"] },
-	DEF win2   Inline { url ["models/win2.wrl"] },
-	DEF win3   Inline { url ["models/win3.wrl"] },
-	DEF win4   Inline { url ["models/win4.wrl"] },
-	DEF win5   Inline { url ["models/win5.wrl"] },
-	DEF win6   Inline { url ["models/win6.wrl"] },
-	DEF win7   Inline { url ["models/win7.wrl"] },
-	DEF win8   Inline { url ["models/win8.wrl"] },
-	DEF win9   Inline { url ["models/win9.wrl"] },
+	   Inline { url ["models/win1.wrl"] },
+	   Inline { url ["models/win2.wrl"] },
+	   Inline { url ["models/win3.wrl"] },
+	   Inline { url ["models/win4.wrl"] },
+	   Inline { url ["models/win5.wrl"] },
+	   Inline { url ["models/win6.wrl"] },
+	   Inline { url ["models/win7.wrl"] },
+	   Inline { url ["models/win8.wrl"] },
+	   Inline { url ["models/win9.wrl"] },
    ]
 }
 
@@ -112,7 +112,7 @@ Transform {
    children [
 	USE maison,
 	Inline { url ["models/porte.wrl"] },
-	USE win1, USE win2, USE win3, USE win4, USE win5, USE win6, USE win7, USE win8, USE win9
+	Inline { url ["models/win1.wrl"] }, Inline { url ["models/win2.wrl"] }, Inline { url ["models/win3.wrl"] }, Inline { url ["models/win4.wrl"] }, Inline { url ["models/win5.wrl"] }, Inline { url ["models/win6.wrl"] }, Inline { url ["models/win7.wrl"] }, Inline { url ["models/win8.wrl"] }, Inline { url ["models/win9.wrl"] }
    ]
 }
 
@@ -124,7 +124,7 @@ Transform {
    children [
 	USE maison,
 	Inline { url ["models/porte.wrl"] },
-	USE win1, USE win2, USE win3, USE win4, USE win5, USE win6, USE win7, USE win8, USE win9
+	Inline { url ["models/win1.wrl"] }, Inline { url ["models/win2.wrl"] }, Inline { url ["models/win3.wrl"] }, Inline { url ["models/win4.wrl"] }, Inline { url ["models/win5.wrl"] }, Inline { url ["models/win6.wrl"] }, Inline { url ["models/win7.wrl"] }, Inline { url ["models/win8.wrl"] }, Inline { url ["models/win9.wrl"] }
    ]
 }
 
@@ -136,7 +136,7 @@ Transform {
    children [
 	USE maison,
 	Inline { url ["models/porte.wrl"] },
-	USE win1, USE win2, USE win3, USE win4, USE win5, USE win6, USE win7, USE win8, USE win9
+	Inline { url ["models/win1.wrl"] }, Inline { url ["models/win2.wrl"] }, Inline { url ["models/win3.wrl"] }, Inline { url ["models/win4.wrl"] }, Inline { url ["models/win5.wrl"] }, Inline { url ["models/win6.wrl"] }, Inline { url ["models/win7.wrl"] }, Inline { url ["models/win8.wrl"] }, Inline { url ["models/win9.wrl"] }
    ]
 }
 

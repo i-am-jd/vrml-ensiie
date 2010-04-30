@@ -1,0 +1,29 @@
+Centres
+=======
+
+Roue avant Gauche
+1.10284
+0.198033
+2.324844
+
+Roue avant Droite
+-1.10284
+0.198033
+2.324844
+
+Roue arrière Gauche
+1.10284
+0.198033
+-2.158786
+
+Roue arrière Droite
+-1.10284
+0.198033
+-2.158786
+
+
+Axe rotation coffre
+===================
+
+y = 0.994624
+z = -1.965951

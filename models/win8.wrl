@@ -1,0 +1,112 @@
+#VRML V2.0 utf8
+#Exported from Wings 3D 1.2
+DEF win Transform {
+  children [
+  DEF capteur TouchSensor {}
+    Shape {
+      appearance Appearance {
+        material DEF default Material {
+          diffuseColor 1.0 1.0 1.0
+          emissiveColor 0.0 0.0 0.0
+          specularColor 1.0 1.0 1.0
+          ambientIntensity 1.0
+          transparency 0.7
+          shininess 1.0
+        }
+      }
+      geometry IndexedFaceSet {
+        normalPerVertex TRUE
+        colorPerVertex TRUE
+        coord Coordinate { point [
+          0.9289558231675767 0.2831784242139529 -0.41000555816854534,
+          0.9289558231675767 0.5887356622965104 -0.41000555816854534,
+          0.9352803782927623 0.5887356622965104 -0.41000555816854534,
+          0.9352803782927623 0.2831784242139529 -0.41000555816854534,
+          0.9289558231675767 0.2831784242139529 -0.7176514606822526,
+          0.9289558231675767 0.5887356622965104 -0.7176514606822526,
+          0.9352803782927623 0.5887356622965104 -0.7176514606822526,
+          0.9352803782927623 0.2831784242139529 -0.7176514606822526 ] }
+        coordIndex [
+          0, 1, 5, 4, -1,
+          0, 3, 2, 1, -1,
+          0, 4, 7, 3, -1,
+          1, 2, 6, 5, -1,
+          2, 3, 7, 6, -1,
+          4, 5, 6, 7, -1 ]
+        normal Normal { vector [
+          -0.5773502691896258 -0.5773502691896258 0.5773502691896258,
+          -0.5773502691896258 0.5773502691896258 0.5773502691896258,
+          0.5773502691896258 0.5773502691896258 0.5773502691896258,
+          0.5773502691896258 -0.5773502691896258 0.5773502691896258,
+          -0.5773502691896258 -0.5773502691896258 -0.5773502691896258,
+          -0.5773502691896258 0.5773502691896258 -0.5773502691896258,
+          0.5773502691896258 0.5773502691896258 -0.5773502691896258,
+          0.5773502691896258 -0.5773502691896258 -0.5773502691896258 ] }
+        normalIndex [
+          0, 1, 5, 4, -1,
+          0, 3, 2, 1, -1,
+          0, 4, 7, 3, -1,
+          1, 2, 6, 5, -1,
+          2, 3, 7, 6, -1,
+          4, 5, 6, 7, -1 ]
+        color Color { color [
+          0.56 0.8866666666666667 0.9866666666666667,
+          1.0 1.0 1.0 ] }
+        colorIndex [
+          0, 0, 0, 0, -1,
+          0, 0, 0, 0, -1,
+          0, 0, 0, 0, -1,
+          0, 0, 0, 0, -1,
+          0, 0, 0, 0, -1,
+          0, 0, 0, 0, -1 ]
+      }
+    }
+  ]
+}
+
+DEF winTranInterp PositionInterpolator {
+	  key [ 0, 1 ]
+	  keyValue [ 0 0 0, 0 0 0.27]
+}
+
+DEF winTranTime TimeSensor {
+	cycleInterval 1
+	startTime -1
+	stopTime 0
+	loop FALSE
+}
+
+DEF winScript Script {
+	field SFBool opened FALSE
+	field SFBool blocked FALSE
+	field SFNode winTranInterp USE winTranInterp
+	field SFNode winTranTime USE winTranTime
+	field SFNode win USE win
+	
+	eventIn SFTime trigger
+	eventIn SFBool isActive
+	
+	url "javascript:function trigger(time) {
+						if(blocked)
+							return;
+						if(!opened) {
+							opened = true;
+							winTranInterp.keyValue[0][2] = 0;
+							winTranInterp.keyValue[1][2] = 0.27;
+						} else {
+							opened = false;
+							winTranInterp.keyValue[0][2] = 0.27;
+							winTranInterp.keyValue[1][2] = 0;
+						}
+						winTranTime.set_startTime = time; 
+					}
+					function isActive(b) {
+						blocked = b;
+					}"
+}
+
+ROUTE winTranInterp.value_changed TO win.set_translation
+ROUTE winTranTime.fraction_changed TO winTranInterp.set_fraction
+ROUTE capteur.touchTime TO winScript.trigger
+ROUTE winTranTime.isActive TO winScript.isActive
+

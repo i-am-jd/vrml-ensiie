@@ -35,8 +35,9 @@ function trigger(time) {
 
 function isActive(b, time) {
     blocked = b;
-    if(!b) {
+    if(!b) {// && Browser.aboutToGoThrough) {
 	Browser.callPendingAction(time);
+	Browser.aboutToGoThrough = false;
     }
 }
 

@@ -69,9 +69,23 @@ Group {
 DEF yt Group {
   children [ Inline { url "yt/yt.wrl" } ]
 }
+Transform {
+  translation 0 0 16
+  children [ Shape { geometry Sphere { } } ]
+}
+
+DEF feu Transform {
+  scale 0.6 0.6 0.6
+  translation 5.5 0 5.5
+  rotation 0 1 0 1.57
+  children [ Inline { url "models/feu.wrl" },
+             Inline { url "models/feu_boule_orange.wrl" },
+             Inline { url "models/feu_boule_verte.wrl" },
+             Inline { url "models/feu_boule_rouge.wrl" } ]
+}
 
 DEF car Transform {
-  translation 8 1 -14
+  translation 8 1 -34
   children [
     Inline { url "models/voiture_main.wrl" },
     Inline { url "models/voiture_coffre.wrl" }
@@ -79,7 +93,7 @@ DEF car Transform {
 }
 
 DEF carTimer TimeSensor {
-    cycleInterval 3
+    cycleInterval 30
 	loop TRUE
 }
 
@@ -115,29 +129,63 @@ ROUTE carInterp.value_changed   TO car.set_translation
     }
 
 DEF carTiresTimer TimeSensor {
-  cycleInterval 3
+  cycleInterval 30
   loop TRUE
 }
 
-DEF carTiresInterp PositionInterpolator {
-	key      [0, 0.3, 0.31, 0.35, 0.36, 1]
+#36.32 1.00 -0.80 -3.52 -5.76 -10.60 -12.84 -15.56 -17.36 -51.68
+#-36.32 -1.00 0.80 3.52 5.76 10.60 12.84 15.56 17.36 51.68
+DEF carFrontTiresInterp PositionInterpolator {
+	key      [0.0,0.375,0.39545454545454545,0.4263636363636364,0.4518181818181818,0.5068181818181818,0.5322727272727273,0.5631818181818182,0.5836363636363636,1.0]
+
 	keyValue [8 0.25 -34,
-	          8 0.25 -1.9,
-			  8 0.5  -1.23,
-			  8 0.5  1.48,
-			  8 0.25 2.12,
-			  8 0.5  54]
+	          8 0.25 -1,
+			  8 0.5  0.8,
+			  8 0.5  3.52,
+			  8 0.25 5.76,
+			  8 0.25 10.6,
+			  8 0.5 12.84,
+			  8 0.5 15.56,
+			  8 0.25 17.36,
+			  8 0.25 54]
+}
+#[0.0,0.40136363636363637,0.4218181818181818,0.45272727272727276,0.47818181818181815,0.5331818181818182,0.5586363636363636,0.5895454545454545,0.61,1.0]
+
+# -0.21, 1.32, 0.37, 1.32, 0.43
+# -0.03, 3.12, 0.40, 3.12, 0.45
+# -0.01, 5.84, 0.43, 5.84, 0.48
+# -0.21, 8.08, 0.45, 8.08, 0.50
+# -0.21, 12.92, 0.51, 12.92, 0.56
+# -0.01, 15.16, 0.53, 15.16, 0.58
+# -0.03, 17.88, 0.56, 17.88, 0.61
+# -0.21, 19.68, 0.58, 19.68, 0.63
+
+#-29.52 3.48 5.28 8.00 10.24 15.08 17.32 20.04 21.84 58.48
+#-31.84 3.48 5.28 8.00 10.24 15.08 17.32 20.04 21.84 56.16
+DEF carRearTiresInterp PositionInterpolator {
+	key      [0.0,0.42590909090909096,0.44636363636363635,0.4772727272727273,0.5027272727272728,0.5577272727272727,0.5831818181818181,0.6140909090909091,0.6345454545454546,1.0]
+	keyValue [8 0.25 -34,
+	          8 0.25 3.48,
+			  8 0.5  5.28,
+			  8 0.5  8,
+			  8 0.25 10.24,
+			  8 0.25 15.08,
+			  8 0.5 17.32,
+			  8 0.5 20.04,
+			  8 0.25 21.84,
+			  8 0.25 54]
 }
 
-ROUTE carTiresTimer.fraction_changed TO carTiresInterp.set_fraction
-ROUTE carTiresInterp.value_changed   TO tireAvD.set_translation
-ROUTE carTiresInterp.value_changed   TO tireAvG.set_translation
-ROUTE carTiresInterp.value_changed   TO tireArD.set_translation
-ROUTE carTiresInterp.value_changed   TO tireArG.set_translation
+ROUTE carTiresTimer.fraction_changed TO carFrontTiresInterp.set_fraction
+ROUTE carTiresTimer.fraction_changed TO carRearTiresInterp.set_fraction
 
+ROUTE carFrontTiresInterp.value_changed TO tireAvD.set_translation
+ROUTE carFrontTiresInterp.value_changed TO tireAvG.set_translation
+ROUTE carRearTiresInterp.value_changed  TO tireArD.set_translation
+ROUTE carRearTiresInterp.value_changed  TO tireArG.set_translation
 
 DEF carTiresRotTimer TimeSensor {
-	cycleInterval 0.1358
+	cycleInterval 0.01358
 	loop TRUE
 }
 
@@ -165,10 +213,10 @@ Transform {
 ]
 }
 
-Transform {
-  translation 10 -0.2094 8.0814
-  children [ Shape { geometry Sphere { } } ]
-}
+# Transform {
+#   translation 10 -0.2094 8.0814
+#   children [ Shape { geometry Sphere { } } ]
+# }
 
 EXTERNPROTO Door [
   field MFFloat key 
@@ -303,6 +351,8 @@ Transform {
 #DEF yt Inline { url "yt/yt.wrl" } ]
 #}
 
+# Bosquet de palmiers
+
 Transform {
 	translation -18 0 -10
 	scale 1. 0.8 1.
@@ -326,11 +376,78 @@ Transform {
 	children [ USE tree9 ]
 }
 
+# Palmiers entre les maisons 1 et 2 (bord gauche)
+#3.24 2.76 3.21 2.09
 Transform {
 	translation -10 0 0
 	scale 0.6 0.6 0.6
+	rotation 0 1 0 3.24
 	children [ USE tree9 ]
 }
+
+Transform {
+	scale 0.6 0.8 0.6
+	translation -12 0 0
+	rotation 0 1 0 2.76
+	children [ USE tree9 ]
+}
+
+Transform {
+	scale 0.6 0.8 0.6
+	translation -8 0 0
+	rotation 0 1 0 3.21
+	children [ USE tree9 ]
+}
+
+Transform {
+	scale 0.4 0.5 0.4
+	translation -6 0 0
+	rotation 0 1 0 2.09
+	children [ USE tree9 ]
+}
+
+Transform {
+	scale 0.4 0.5 0.4
+	translation -14 0 0
+	rotation 0 1 0 0
+	children [ USE tree9 ]
+}
+
+# Palmiers entre les maisons 3 et 4 (bord droit)
+
+Transform {
+	translation -10 0 21
+	scale 0.6 0.6 0.6
+	children [ USE tree9 ]
+}
+
+Transform {
+	scale 0.6 0.8 0.6
+	translation -12 0 21
+	children [ USE tree9 ]
+}
+
+Transform {
+	scale 0.6 0.8 0.6
+	translation -8 0 21
+	children [ USE tree9 ]
+}
+
+Transform {
+	scale 0.4 0.5 0.4
+	translation -6 0 21
+	rotation 0 1 0 2.09
+	children [ USE tree9 ]
+}
+
+Transform {
+	scale 0.4 0.5 0.4
+	translation -14 0 21
+	rotation 0 1 0 0
+	children [ USE tree9 ]
+}
+
+# Plantes sur le bord des maisons
 
 Transform {
 	scale 0.1 0.1 0.1

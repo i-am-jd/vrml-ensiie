@@ -1,14 +1,14 @@
-//Path finfing
+//Path finding
 function house1(time) { walkToCoords([0,0], time);}
-function door1(time) { walkToCoords([0,5], time); }
-function cross1(time) { walkToCoords([5, 5], time); }
+function door1(time) { walkToCoords([0.1,5], time); }
+function cross1(time) { walkToCoords([4.5, 4.5], time); }
 
 function house2(time) { walkToCoords([-20,0], time); }
 function door2(time) { walkToCoords([-20,5], time); }
 function cross2(time) { walkToCoords([5, 16], time); }
 
 function house3(time) { walkToCoords([0, 21], time); }
-function door3(time) { walkToCoords([0, 16], time); }
+function door3(time) { walkToCoords([0.1, 16], time); }
 function cross3(time) { walkToCoords([5, 16], time); }
 
 function house4(time) { walkToCoords([-20, 21], time); }
@@ -19,6 +19,7 @@ function cinema2(time) { walkToCoords([17, 16], time); }
 
 function openDoor(i) {
     return function(time) {
+	Browser.aboutToGoThrough = true;
 	doors[i-1].set_openTime = time;
     }
 }
@@ -32,6 +33,7 @@ function wait(duration) {
 
 function closeDoor(i) {
     return function(time) {
+	Browser.aboutToGoThrough = true;
 	doors[i-1].set_closeTime = time;
     }
 }
@@ -54,7 +56,7 @@ function defaultActions() {
     	    return [cross1, cross3, door3,
 		    openDoor(3), house3, closeDoor(3), wait(5),
 		    openDoor(3), door3, closeDoor(3), wait(5),
-		    cross3, cinema2, cinema1, cross1,
+		    cross3, cross1,
 		    door1, openDoor(1), house1, closeDoor(1)];
     	} else {
     	    return [door2, openDoor(2), house2, closeDoor(2), wait(5),
@@ -129,6 +131,9 @@ function timerDone(b, time) {
 
 //Update VRML animations
 
+var destx;
+var destz;
+
 function updateStandAnim() {
     for(var i=0; i<3; i++) {
 	standBodyTran.keyValue[0][i] = hanim_HumanoidRoot.translation[i];
@@ -174,6 +179,8 @@ function walkTo(x1, z1, time) {
     var z0 = hanim_HumanoidRoot.translation[2];
     var angle = Math.atan2(x1 - x0, z1 - z0);
     var dist = Math.sqrt(Math.pow((x1 - x0), 2) + Math.pow((z1 - z0), 2));
+    destx = x1;
+    destz = z1;
     startWalk(angle, dist, time);
 }
 
@@ -220,7 +227,7 @@ function continueWalk(b, time) {
 
 function stopWalk(fraction, time) {
     //Stop animation when endFraction of it reached
-    if(fraction >= cyclesFraction) {
+    if(Math.abs(fraction - cyclesFraction) > 0.1) {
 	Walk_Time.set_enabled = false;
 	Browser.deleteRoute(Walk_Time, "fraction_changed", this, "stopWalk");
 	updateStandAnim();

@@ -210,6 +210,7 @@ DEF humanoid Humanoid {
 			center 0 0.9343 -0.1642
 			rotation 0 1 0 0
 			children [
+                DEF capteur TouchSensor {}
 				DEF hanim_sacroiliac Joint {
 					name "sacroiliac"
 					llimit [-0.000776 0 -0.000265]

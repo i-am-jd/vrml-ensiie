@@ -1,6 +1,6 @@
 //Path finding
 function house1(time) { walkToCoords([0,0], time);}
-function door1(time) { walkToCoords([0.1,5], time); }
+function door1(time) { walkToCoords([0,5], time); }
 function cross1(time) { walkToCoords([4.5, 4.5], time); }
 
 function house2(time) { walkToCoords([-20,0], time); }
@@ -8,7 +8,7 @@ function door2(time) { walkToCoords([-20,5], time); }
 function cross2(time) { walkToCoords([5, 16], time); }
 
 function house3(time) { walkToCoords([0, 21], time); }
-function door3(time) { walkToCoords([0.1, 16], time); }
+function door3(time) { walkToCoords([0, 16], time); }
 function cross3(time) { walkToCoords([5, 16], time); }
 
 function house4(time) { walkToCoords([-20, 21], time); }
@@ -45,7 +45,7 @@ function enterWaitAndOut(i) {
 }	
 
 //Actions triggered when destination reached
-pendingActions = [];
+pendingActions1 = [];
 
 function defaultActions() {
     var defaultActions = [];
@@ -68,32 +68,32 @@ function defaultActions() {
 }
 
 function testWalk(time) {
-    pendingActions = pendingActions.concat(defaultActions());
+    pendingActions1 = pendingActions1.concat(defaultActions());
     callPendingAction(time);
 }
 
 // function cycleActions(actions) {
 // 	var addActions = function(time) {
-// 		pendingActions = pendingActions.concat(actions);
-// 		pendingActions = pendingActions.concat(addActions);
+// 		pendingActions1 = pendingActions1.concat(actions);
+// 		pendingActions1 = pendingActions1.concat(addActions);
 // 		callPendingAction(time);
 // 	}
 	
-// 	pendingActions = pendingActions.concat(actions);
-// 	pendingActions = pendingActions.concat(addActions);
+// 	pendingActions1 = pendingActions1.concat(actions);
+// 	pendingActions1 = pendingActions1.concat(addActions);
 // }
 
 function callPendingAction(time) {
-    if(pendingActions.length == 0) {
-	pendingActions = pendingActions.concat(defaultActions());
+    if(pendingActions1.length == 0) {
+	pendingActions1 = pendingActions1.concat(defaultActions());
 	callPendingAction(time);
 	return;
     }
 
-    var action = pendingActions[0];
+    var action = pendingActions1[0];
 	
     if(action == null) {
-	pendingActions.shift();
+	pendingActions1.shift();
 	return;
     }
 	
@@ -101,11 +101,11 @@ function callPendingAction(time) {
     if(action instanceof Array) {
 	if(action.length > 0) {
 	    var first = action.shift();
-	    pendingActions[0] = action;
+	    pendingActions1[0] = action;
 	    first(time);
 	    return;
 	} else {
-	    pendingActions.shift();
+	    pendingActions1.shift();
 	    callPendingAction(time);
 	    return;
 	}
@@ -116,10 +116,10 @@ function callPendingAction(time) {
 	
     if(result instanceof Array && result.length > 0) {
 	//Several actions returned
-	pendingActions[0] = result;
+	pendingActions1[0] = result;
 	callPendingAction(time);
     } else {
-	pendingActions.shift();
+	pendingActions1.shift();
     }
 }
 
@@ -227,7 +227,7 @@ function continueWalk(b, time) {
 
 function stopWalk(fraction, time) {
     //Stop animation when endFraction of it reached
-    if(Math.abs(fraction - cyclesFraction) > 0.1) {
+    if(Math.abs(fraction - cyclesFraction) > 0) {
 	Walk_Time.set_enabled = false;
 	Browser.deleteRoute(Walk_Time, "fraction_changed", this, "stopWalk");
 	updateStandAnim();
@@ -246,5 +246,7 @@ function start(b, time) {
 }
 
 function initialize() {
-    Browser.callPendingAction = callPendingAction;
+    yt1 = new Object();
+    yt1.callPendingAction = callPendingAction
+    Browser.yt1 = yt1;
 }

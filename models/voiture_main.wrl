@@ -8,6 +8,8 @@ DEF cube1 Transform {
         description "Voiture"
     	jump FALSE
        }
+	Sound {
+	  source AudioClip { url "../sounds/earlycarengine.wav" loop TRUE} }
     Shape {
       appearance Appearance {
         material DEF default Material {

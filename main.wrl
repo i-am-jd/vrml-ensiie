@@ -69,15 +69,31 @@ Group {
 DEF yt Group {
   children [ Inline { url "yt/yt.wrl" } ]
 }
+
+# Transform {
+#   translation 10 0 10
+#   children [ Inline { url "yt/yt2.wrl" } ]
+# } 
+
 Transform {
   translation 0 0 16
   children [ Shape { geometry Sphere { } } ]
 }
 
-DEF feu Transform {
+DEF feu1 Transform {
   scale 0.6 0.6 0.6
   translation 5.5 0 5.5
   rotation 0 1 0 1.57
+  children [ Inline { url "models/feu.wrl" },
+             Inline { url "models/feu_boule_orange.wrl" },
+             Inline { url "models/feu_boule_verte.wrl" },
+             Inline { url "models/feu_boule_rouge.wrl" } ]
+}
+
+DEF feu2 Transform {
+  scale 0.6 0.6 0.6
+  translation 16 0 16
+  rotation 0 1 0 -1.57
   children [ Inline { url "models/feu.wrl" },
              Inline { url "models/feu_boule_orange.wrl" },
              Inline { url "models/feu_boule_verte.wrl" },
@@ -537,7 +553,7 @@ Transform {
 # Cycle Jour nuit
 
 DEF dayCycleTime TimeSensor {
-	cycleInterval 15
+	cycleInterval 60
 	loop TRUE
 }
 

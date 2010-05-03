@@ -4,10 +4,10 @@ DEF sphere2_copy3 Transform {
   children [
     Shape {
       appearance Appearance {
-        material DEF default Material {
-          diffuseColor 1.0 1.0 1.0
-          emissiveColor 0.0 0.0 0.0
-          specularColor 1.0 1.0 1.0
+        material DEF material Material {
+          diffuseColor 0.9933333333333333 0.2866666666666667 0.0
+          emissiveColor 0.9933333333333333 0.2866666666666667 0.0
+          specularColor 0.9933333333333333 0.2866666666666667 0.0
           ambientIntensity 1.0
           transparency 0.0
           shininess 1.0
@@ -15,7 +15,7 @@ DEF sphere2_copy3 Transform {
       }
       geometry IndexedFaceSet {
         normalPerVertex TRUE
-        colorPerVertex TRUE
+        colorPerVertex FALSE
         coord Coordinate { point [
           0.3341814909429689 6.147834307674821 -2.0032708435560938e-18,
           0.3268407204164713 6.147834307674821 0.036904545570495016,
@@ -641,3 +641,19 @@ DEF sphere2_copy3 Transform {
   ]
 }
 
+DEF timer TimeSensor {
+    cycleInterval 1
+	loop TRUE
+}
+
+DEF colorInterp ColorInterpolator { 
+	key [0, 0.5, 1]
+	keyValue [0 0 0,
+	          0.9933333333333333 0.2866666666666667 0.0,
+			  0.9933333333333333 0.2866666666666667 0.0]
+}
+
+ROUTE timer.fraction_changed    TO colorInterp.set_fraction
+ROUTE colorInterp.value_changed TO material.set_diffuseColor
+ROUTE colorInterp.value_changed TO material.set_emissiveColor
+ROUTE colorInterp.value_changed TO material.set_specularColor

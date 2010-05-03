@@ -2,6 +2,12 @@
 #Exported from Wings 3D 1.2
 DEF cube1 Transform {
   children [
+      Viewpoint {
+        position 0 1.5 1
+        orientation 0 1 0 -3.14					#rotation selon y de -pi/2
+        description "Voiture"
+    	jump FALSE
+       }
     Shape {
       appearance Appearance {
         material DEF default Material {
